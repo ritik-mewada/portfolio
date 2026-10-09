@@ -38,6 +38,8 @@ export const metadata: Metadata = {
     "React",
     "Next.js",
     "Playwright",
+    "Modbus",
+    "MQTT",
     "Toronto",
     "Ontario",
   ],
@@ -68,7 +70,7 @@ const jsonLd = {
   name: site.name,
   url: site.url,
   email: `mailto:${site.email}`,
-  jobTitle: "IoT QA / Software Validation Engineer",
+  jobTitle: "Quality Assurance Engineer",
   worksFor: { "@type": "Organization", name: "Maestro Digital Mine" },
   address: { "@type": "PostalAddress", addressRegion: "ON", addressCountry: "CA" },
   alumniOf: [
@@ -76,7 +78,7 @@ const jsonLd = {
     { "@type": "CollegeOrUniversity", name: "Gujarat Technological University" },
   ],
   sameAs: [site.socials.github, site.socials.linkedin],
-  knowsAbout: ["Software Quality Assurance", "Test Automation", "IoT", "React", "Next.js", "Node.js", "TypeScript"],
+  knowsAbout: ["Software Quality Assurance", "Hardware Testing", "IoT", "Modbus", "MQTT", "TCP/IP", "React", "Next.js", "Node.js", "TypeScript"],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
