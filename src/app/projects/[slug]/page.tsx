@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
         </div>
         <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">{project.title}</h1>
-        <p className="mt-3 font-serif text-2xl text-accent italic">{project.tagline}</p>
+        <p className="mt-3 text-2xl font-medium text-accent">{project.tagline}</p>
         <p className="mt-8 text-lg leading-relaxed text-muted-foreground">{project.description}</p>
       </Reveal>
 
@@ -57,7 +57,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </a>
         )}
         {project.repos.map((r) => (
-          <a key={r.url} href={r.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border bg-card px-5 py-2.5 text-sm transition-colors hover:bg-muted">
+          <a key={r.url} href={r.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full glass px-5 py-2.5 text-sm transition-colors hover:bg-muted">
             <SiGithub className="size-4" /> {r.label}
           </a>
         ))}
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             ))}
           </ul>
 
-          <div className="mt-12 rounded-2xl border bg-card p-6">
+          <div className="mt-12 rounded-2xl glass p-6">
             <h2 className="flex items-center gap-2 font-medium">
               <Lightbulb className="size-4 text-accent" /> What I learned
             </h2>

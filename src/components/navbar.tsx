@@ -1,24 +1,27 @@
 "use client";
 
-import { Command as CommandIcon, Menu, X } from "lucide-react";
-import { useLenis } from "lenis/react";
+import { Command as CommandIcon, Menu, ScanSearch, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/content/site";
-import { navItems, OPEN_COMMAND_MENU } from "@/lib/nav";
+import { navItems, OPEN_COMMAND_MENU, QA_LENS_STATE, TOGGLE_QA_LENS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [active, setActive] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [lensOn, setLensOn] = useState(false);
 
-  useLenis(({ scroll }) => setScrolled(scroll > 24));
+  useEffect(() => {
+    const onState = (e: Event) => setLensOn((e as CustomEvent<boolean>).detail);
+    window.addEventListener(QA_LENS_STATE, onState);
+    return () => window.removeEventListener(QA_LENS_STATE, onState);
+  }, []);
 
   useEffect(() => {
     if (!isHome) return;
@@ -41,12 +44,7 @@ export function Navbar() {
     <header className="no-print fixed inset-x-0 top-0 z-50 px-4 pt-4">
       <nav
         aria-label="Main"
-        className={cn(
-          "mx-auto flex max-w-5xl items-center justify-between rounded-full border px-3 py-2 transition-all duration-300",
-          scrolled || !isHome || mobileOpen
-            ? "border-border bg-background/75 shadow-lg shadow-black/5 backdrop-blur-xl"
-            : "border-transparent",
-        )}
+        className="glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-3 py-2"
       >
         <Link href="/" className="flex items-center gap-2 pl-2 font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
           <span className="grid size-7 place-items-center rounded-full bg-accent font-mono text-[11px] text-accent-foreground">
@@ -94,6 +92,19 @@ export function Navbar() {
           >
             <CommandIcon className="size-3" /> K
           </button>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(TOGGLE_QA_LENS))}
+            aria-pressed={lensOn}
+            aria-label="QA Lens: inspect this page"
+            title="QA Lens (Ctrl+L / ⌘L)"
+            className={cn(
+              "grid size-9 place-items-center rounded-full transition-colors",
+              lensOn ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            <ScanSearch className="size-4" />
+          </button>
           <ThemeToggle />
           <button
             type="button"
@@ -113,7 +124,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="mx-auto mt-2 max-w-5xl rounded-3xl border bg-background/90 p-3 backdrop-blur-xl md:hidden"
+            className="mx-auto mt-2 max-w-5xl rounded-3xl glass p-3 md:hidden"
           >
             <ul className="grid gap-1">
               {navItems.map(({ id, label }) => (

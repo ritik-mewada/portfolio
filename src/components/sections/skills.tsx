@@ -16,7 +16,7 @@ function Marquee({ items, reverse }: { items: string[]; reverse?: boolean }) {
           <li
             key={name + i}
             aria-hidden={i >= items.length}
-            className="flex items-center gap-2.5 rounded-full border bg-card px-4 py-2 text-sm whitespace-nowrap"
+            className="flex items-center gap-2.5 rounded-full glass-lite px-4 py-2 text-sm whitespace-nowrap"
           >
             <TechIcon name={name} className="size-4 text-muted-foreground" />
             {name}
@@ -48,7 +48,7 @@ export function Skills() {
       <div className="mx-auto mt-16 grid max-w-6xl gap-4 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-3">
         {skills.map((group, i) => (
           <Reveal key={group.title} delay={i * 0.05}>
-            <div className="h-full rounded-2xl border bg-card p-6">
+            <div className="h-full rounded-2xl glass p-6">
               <h3 className="font-mono text-xs tracking-widest text-accent uppercase">{group.title}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {group.items.map((item) => (

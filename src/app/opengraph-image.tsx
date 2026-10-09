@@ -17,11 +17,10 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "#121318",
+          background: "#f5f7fb",
           backgroundImage:
-            "radial-gradient(circle at 85% 10%, rgba(197,240,74,0.25), transparent 45%), linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-          backgroundSize: "100% 100%, 56px 56px, 56px 56px",
-          color: "#f4f3ee",
+            "radial-gradient(circle at 8% 0%, rgba(255,170,150,0.8), transparent 45%), radial-gradient(circle at 95% 15%, rgba(165,180,252,0.85), transparent 45%), radial-gradient(circle at 50% 110%, rgba(125,211,252,0.75), transparent 50%)",
+          color: "#1d1d1f",
           fontFamily: "sans-serif",
         }}
       >
@@ -34,20 +33,20 @@ export default function OpengraphImage() {
               width: 64,
               height: 64,
               borderRadius: 999,
-              background: "#c5f04a",
-              color: "#14200a",
+              background: "linear-gradient(135deg, #0071e3, #7c3aed)",
+              color: "#ffffff",
               fontSize: 26,
               fontWeight: 700,
             }}
           >
             {site.initials}
           </div>
-          <div style={{ fontSize: 28, color: "#a3a7b3" }}>{site.url.replace(/^https?:\/\//, "")}</div>
+          <div style={{ fontSize: 28, color: "#5d5d63" }}>{site.url.replace(/^https?:\/\//, "")}</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 92, fontWeight: 700, letterSpacing: -3 }}>{site.name}</div>
-          <div style={{ fontSize: 40, color: "#c5f04a", marginTop: 8 }}>{current?.role ?? site.role}</div>
-          <div style={{ fontSize: 30, color: "#a3a7b3", marginTop: 24 }}>
+          <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: -4 }}>{site.name}</div>
+          <div style={{ fontSize: 44, color: "#0071e3", marginTop: 8, fontWeight: 600 }}>{current?.role ?? site.role}</div>
+          <div style={{ fontSize: 30, color: "#5d5d63", marginTop: 24 }}>
             {`Full-stack developer · Test automation${current ? ` · ${current.company}` : ""}`}
           </div>
         </div>
