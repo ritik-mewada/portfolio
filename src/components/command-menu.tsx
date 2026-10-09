@@ -33,8 +33,8 @@ const sectionIcons = {
   contact: Mail,
 } as const;
 
-export function CommandMenu() {
-  const [open, setOpen] = useState(false);
+export function CommandMenu({ defaultOpen = false }: { defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   const router = useRouter();
   const pathname = usePathname();
   const lenis = useLenis();
