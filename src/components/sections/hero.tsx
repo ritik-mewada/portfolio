@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { toast } from "sonner";
+import { ProfilePhoto } from "@/components/profile-photo";
 import { experience, site } from "@/content/site";
 
 const current = experience.find((e) => e.current);
@@ -45,7 +46,7 @@ const testLines = [
   { name: "perf › LCP under 1.5s on 4G", ms: 189 },
 ];
 
-function TestRunnerCard() {
+function TestRunnerCard({ className }: { className?: string }) {
   const [shown, setShown] = useState(0);
   useEffect(() => {
     if (shown >= testLines.length) return;
@@ -59,7 +60,7 @@ function TestRunnerCard() {
       initial={{ opacity: 0, y: 30, rotate: 2 }}
       animate={{ opacity: 1, y: 0, rotate: 0 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="relative hidden w-full max-w-md overflow-hidden rounded-2xl border glass font-mono text-[12.5px] shadow-2xl shadow-black/10 lg:block"
+      className={`overflow-hidden rounded-2xl border glass font-mono shadow-2xl shadow-black/10 ${className ?? ""}`}
       role="figure"
       aria-label="Example test run"
     >
@@ -69,7 +70,7 @@ function TestRunnerCard() {
         <span className="size-2.5 rounded-full bg-green-400/80" />
         <span className="ml-3 text-muted-foreground">~/ritik — npx playwright test</span>
       </div>
-      <div className="space-y-1.5 p-4">
+      <div className="space-y-1 p-3.5">
         <p className="text-muted-foreground">Running {testLines.length} tests using 3 workers</p>
         {testLines.slice(0, shown).map((l) => (
           <motion.p key={l.name} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className="flex gap-2">
@@ -115,8 +116,10 @@ export function Hero() {
     >
       <motion.div className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
 
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr] lg:pr-20 xl:pr-8">
         <div>
+          <ProfilePhoto sizes="96px" className="animate-fade-up mb-6 size-24 rounded-3xl text-2xl ring-1 ring-border lg:hidden" />
+
           {current && (
             <a
               {...fade(0)}
@@ -183,8 +186,15 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
-          <TestRunnerCard />
+        {/* Desktop: framed portrait with the test run overlapping its corner. */}
+        <div className="relative hidden w-full max-w-[340px] justify-self-end pb-40 lg:block">
+          <div {...fade(0.15)} className="animate-fade-up glass rounded-[32px] p-2.5">
+            <ProfilePhoto priority sizes="340px" className="aspect-[4/5] w-full rounded-3xl text-6xl" />
+          </div>
+          <span className="glass absolute top-5 right-5 flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium">
+            <span className="size-2 rounded-full bg-green-500" /> {site.availability}
+          </span>
+          <TestRunnerCard className="absolute bottom-0 -left-12 w-[330px] text-[11.5px]" />
         </div>
       </div>
     </section>

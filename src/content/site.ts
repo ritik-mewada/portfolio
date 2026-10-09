@@ -5,6 +5,8 @@ export const site = {
   name: "Ritik Mewada",
   shortName: "Ritik",
   initials: "RM",
+  // Profile photo in /public. Leave null to show the initials placeholder.
+  photo: null as string | null,
   role: "Software Engineer",
   rotatingRoles: [
     "Quality Assurance Engineering",

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ProfilePhoto } from "@/components/profile-photo";
 import { ThemeToggle } from "@/components/theme-toggle";
 // Visitor theme picker: disabled for now (see src/themes/index.ts).
 // import { ThemePicker } from "@/components/theme-picker";
@@ -49,9 +50,13 @@ export function Navbar() {
         className="glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-3 py-2"
       >
         <Link href="/" className="flex items-center gap-2 pl-2 font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
-          <span className="grid size-7 place-items-center rounded-full bg-accent font-mono text-[11px] text-accent-foreground">
-            {site.initials}
-          </span>
+          {site.photo ? (
+            <ProfilePhoto sizes="28px" className="size-7 rounded-full" />
+          ) : (
+            <span className="grid size-7 place-items-center rounded-full bg-accent font-mono text-[11px] text-accent-foreground">
+              {site.initials}
+            </span>
+          )}
           <span className="hidden sm:inline">{site.name}</span>
         </Link>
 
