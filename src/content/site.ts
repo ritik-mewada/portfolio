@@ -6,7 +6,6 @@ export const site = {
   shortName: "Ritik",
   initials: "RM",
   role: "Software Engineer",
-  headline: "I build web software, then make sure it holds up.",
   rotatingRoles: [
     "IoT QA & Software Validation",
     "Full-Stack Development",
@@ -37,7 +36,7 @@ export const site = {
   ],
 } as const;
 
-export type Experience = {
+type Experience = {
   company: string;
   role: string;
   url?: string;
@@ -144,7 +143,7 @@ export const education = [
   },
 ];
 
-export type SkillGroup = { title: string; items: string[] };
+type SkillGroup = { title: string; items: string[] };
 
 export const skills: SkillGroup[] = [
   {
@@ -175,7 +174,7 @@ export const skills: SkillGroup[] = [
 
 export type ProjectStatus = "Complete" | "In progress" | "Learning build" | "Team project" | "Academic";
 
-export type Project = {
+type Project = {
   slug: string;
   title: string;
   tagline: string;
