@@ -101,11 +101,8 @@ export function Hero() {
       () => toast.error(site.email),
     );
 
-  const fade = (delay: number) => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  });
+  // CSS (not JS) entrance animation so hero text paints before hydration.
+  const fade = (delay: number) => ({ style: { animationDelay: `${delay}s` } });
 
   return (
     <section
@@ -124,37 +121,37 @@ export function Hero() {
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
         <div>
           {current && (
-            <motion.a
+            <a
               {...fade(0)}
               href="#experience"
-              className="mb-8 inline-flex items-center gap-2.5 rounded-full border bg-card/60 py-1.5 pr-4 pl-2 text-xs text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+              className="animate-fade-up mb-8 inline-flex items-center gap-2.5 rounded-full border bg-card/60 py-1.5 pr-4 pl-2 text-xs text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
             >
               <span className="relative flex size-2 ml-1">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-accent" />
               </span>
               Now: {current.role} at <span className="font-medium text-foreground">{current.company}</span>
-            </motion.a>
+            </a>
           )}
 
-          <motion.p {...fade(0.05)} className="mb-3 font-mono text-sm text-muted-foreground">
+          <p {...fade(0.05)} className="animate-fade-up mb-3 font-mono text-sm text-muted-foreground">
             Hi, I&apos;m {site.name} —
-          </motion.p>
-          <motion.h1 {...fade(0.1)} className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
+          </p>
+          <h1 {...fade(0.1)} className="animate-fade-up text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
             I build web software,{" "}
             <span className="font-serif font-normal italic text-accent">then make sure it holds up.</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p {...fade(0.2)} className="mt-6 h-7 font-mono text-base text-foreground sm:text-lg" aria-label={site.rotatingRoles.join(", ")}>
+          <p {...fade(0.2)} className="animate-fade-up mt-6 h-7 font-mono text-base text-foreground sm:text-lg" aria-label={site.rotatingRoles.join(", ")}>
             <span className="text-accent">&gt;</span> <span aria-hidden>{role}</span>
             <span aria-hidden className="ml-0.5 inline-block h-5 w-[2px] translate-y-1 animate-blink bg-accent" />
-          </motion.p>
+          </p>
 
-          <motion.p {...fade(0.25)} className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p {...fade(0.25)} className="animate-fade-up mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             {site.summary}
-          </motion.p>
+          </p>
 
-          <motion.div {...fade(0.35)} className="mt-10 flex flex-wrap items-center gap-3">
+          <div {...fade(0.35)} className="animate-fade-up mt-10 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
               className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-transform hover:scale-[1.03] active:scale-95"
@@ -174,9 +171,9 @@ export function Hero() {
             >
               <Copy className="size-4" /> {site.email}
             </button>
-          </motion.div>
+          </div>
 
-          <motion.div {...fade(0.45)} className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-muted-foreground">
+          <div {...fade(0.45)} className="animate-fade-up mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-muted-foreground">
             <span className="inline-flex items-center gap-2 text-sm">
               <MapPin className="size-4 text-accent" /> {site.location}
             </span>
@@ -186,7 +183,7 @@ export function Hero() {
             <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-foreground">
               <FaLinkedinIn className="size-4" /> LinkedIn <ArrowUpRight className="size-3" />
             </a>
-          </motion.div>
+          </div>
         </div>
 
         <div className="flex justify-center lg:justify-end">
