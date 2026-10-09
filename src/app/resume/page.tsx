@@ -20,7 +20,7 @@ export default function ResumePage() {
         <PrintButton />
       </div>
 
-      <div className="rounded-3xl border bg-card p-8 sm:p-12 print:rounded-none print:border-0 print:bg-white print:p-0">
+      <div className="rounded-3xl glass p-8 sm:p-12 print:rounded-none print:border-0 print:bg-white print:p-0">
         <header>
           <h1 className="text-3xl font-semibold tracking-tight">{site.name}</h1>
           <p className="mt-1 text-lg text-muted-foreground print:text-black">{experience[0].role}</p>

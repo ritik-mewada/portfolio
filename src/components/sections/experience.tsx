@@ -32,7 +32,7 @@ export function Experience() {
             />
 
             <Reveal delay={0.1 + i * 0.02} className="pl-8 md:pl-8">
-              <article className="group rounded-2xl border bg-card p-6 transition-colors hover:border-accent/40">
+              <article className="group rounded-2xl glass p-6 transition-colors hover:border-accent/40">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <h3 className="text-lg font-semibold tracking-tight">{job.role}</h3>

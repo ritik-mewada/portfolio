@@ -1,0 +1,52 @@
+/*
+ * Classic theme: the original site look (lime accent, Geist + Instrument Serif).
+ * Not loaded yet. To enable it, import this file in src/app/globals.css and
+ * turn on the theme picker (see src/themes/index.ts).
+ */
+html[data-site-theme="classic"]:not(.dark) {
+  --background: oklch(0.985 0.004 95);
+  --foreground: oklch(0.2 0.01 260);
+  --muted: oklch(0.955 0.006 95);
+  --muted-foreground: oklch(0.48 0.012 260);
+  --card: oklch(1 0 0);
+  --border: oklch(0.9 0.008 95);
+  --hairline: oklch(0.9 0.008 95);
+  /* Slightly darker than the original green so small text passes WCAG AA. */
+  --accent: oklch(0.5 0.15 145);
+  --accent-foreground: oklch(0.99 0 0);
+  --accent-soft: oklch(0.5 0.15 145 / 0.12);
+  --grid: oklch(0.2 0.01 260 / 0.05);
+}
+
+html[data-site-theme="classic"].dark {
+  --background: oklch(0.155 0.008 260);
+  --foreground: oklch(0.96 0.005 95);
+  --muted: oklch(0.21 0.01 260);
+  --muted-foreground: oklch(0.7 0.012 260);
+  --card: oklch(0.19 0.01 260);
+  --border: oklch(0.28 0.012 260);
+  --hairline: oklch(0.28 0.012 260);
+  --accent: oklch(0.88 0.2 128);
+  --accent-foreground: oklch(0.18 0.02 130);
+  --accent-soft: oklch(0.88 0.2 128 / 0.12);
+  --grid: oklch(0.96 0.005 95 / 0.045);
+}
+
+/* Solid cards instead of frosted glass. */
+html[data-site-theme="classic"] .glass {
+  background-color: var(--card);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+/* Serif italic accent instead of the gradient headline. */
+html[data-site-theme="classic"] .text-gradient {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--accent);
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
