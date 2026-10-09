@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight, Copy, FileText, MapPin } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Copy, FileText, MapPin, ScanSearch } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { toast } from "sonner";
 import { experience, site } from "@/content/site";
+import { TOGGLE_QA_LENS } from "@/lib/nav";
 
 const current = experience.find((e) => e.current);
 
@@ -59,8 +60,9 @@ function TestRunnerCard() {
       initial={{ opacity: 0, y: 30, rotate: 2 }}
       animate={{ opacity: 1, y: 0, rotate: 0 }}
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="relative hidden w-full max-w-md overflow-hidden rounded-2xl border bg-card/80 font-mono text-[12.5px] shadow-2xl shadow-black/10 backdrop-blur lg:block"
-      aria-hidden
+      className="relative hidden w-full max-w-md overflow-hidden rounded-2xl border glass font-mono text-[12.5px] shadow-2xl shadow-black/10 lg:block"
+      role="figure"
+      aria-label="Example test run"
     >
       <div className="flex items-center gap-1.5 border-b px-4 py-3">
         <span className="size-2.5 rounded-full bg-red-400/80" />
@@ -77,13 +79,20 @@ function TestRunnerCard() {
             <span className="ml-auto text-muted-foreground">{l.ms}ms</span>
           </motion.p>
         ))}
-        {finished ? (
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-2 text-accent">
-            {testLines.length} passed · ready to ship
-          </motion.p>
-        ) : (
-          <span className="inline-block h-4 w-2 animate-blink bg-foreground/70 align-middle" />
-        )}
+        <p className="flex items-center justify-between gap-3 pt-2">
+          {finished ? (
+            <span className="text-accent">{testLines.length} passed · ready to ship</span>
+          ) : (
+            <span className="inline-block h-4 w-2 animate-blink bg-foreground/70 align-middle" />
+          )}
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(TOGGLE_QA_LENS))}
+            className="rounded-full bg-accent px-3 py-1 font-sans text-xs font-semibold text-accent-foreground"
+          >
+            Inspect this page
+          </button>
+        </p>
       </div>
     </motion.div>
   );
@@ -114,9 +123,7 @@ export function Hero() {
       }}
       className="relative flex min-h-svh items-center overflow-hidden pt-28 pb-20"
     >
-      <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <motion.div className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
-      <div className="pointer-events-none absolute -top-40 right-[-10%] size-[520px] rounded-full bg-accent/20 blur-[120px]" />
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
         <div>
@@ -124,7 +131,7 @@ export function Hero() {
             <a
               {...fade(0)}
               href="#experience"
-              className="animate-fade-up mb-8 inline-flex items-center gap-2.5 rounded-full border bg-card/60 py-1.5 pr-4 pl-2 text-xs text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+              className="animate-fade-up mb-8 inline-flex items-center gap-2.5 rounded-full glass py-1.5 pr-4 pl-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <span className="relative flex size-2 ml-1">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
@@ -139,7 +146,7 @@ export function Hero() {
           </p>
           <h1 {...fade(0.1)} className="animate-fade-up text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
             I build web software,{" "}
-            <span className="font-serif font-normal italic text-accent">then make sure it holds up.</span>
+            <span className="text-gradient">then make sure it holds up.</span>
           </h1>
 
           <p {...fade(0.2)} className="animate-fade-up mt-6 h-7 font-mono text-base text-foreground sm:text-lg" aria-label={site.rotatingRoles.join(", ")}>
@@ -160,7 +167,7 @@ export function Hero() {
             </a>
             <Link
               href="/resume"
-              className="inline-flex items-center gap-2 rounded-full border bg-card/60 px-5 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-muted"
+              className="inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm font-medium transition-colors hover:bg-muted"
             >
               <FileText className="size-4" /> Resume
             </Link>
@@ -173,17 +180,32 @@ export function Hero() {
             </button>
           </div>
 
-          <div {...fade(0.45)} className="animate-fade-up mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-muted-foreground">
+          <div {...fade(0.45)} className="animate-fade-up mt-7 flex flex-wrap items-center gap-x-5 text-muted-foreground">
             <span className="inline-flex items-center gap-2 text-sm">
               <MapPin className="size-4 text-accent" /> {site.location}
             </span>
-            <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-foreground">
+            <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm transition-colors hover:text-foreground">
               <SiGithub className="size-4" /> GitHub <ArrowUpRight className="size-3" />
             </a>
-            <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-foreground">
+            <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm transition-colors hover:text-foreground">
               <FaLinkedinIn className="size-4" /> LinkedIn <ArrowUpRight className="size-3" />
             </a>
           </div>
+
+          <button
+            type="button"
+            {...fade(0.55)}
+            onClick={() => window.dispatchEvent(new Event(TOGGLE_QA_LENS))}
+            className="animate-fade-up glass group mt-8 inline-flex max-w-full items-center gap-3 rounded-full py-2 pr-4 pl-2 text-left text-sm"
+          >
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
+              <ScanSearch className="size-4" />
+            </span>
+            <span>
+              <span className="font-semibold">Try the QA Lens.</span>{" "}
+              <span className="text-muted-foreground">See this page the way I test software.</span>
+            </span>
+          </button>
         </div>
 
         <div className="flex justify-center lg:justify-end">

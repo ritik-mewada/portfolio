@@ -25,7 +25,7 @@ export function SpotlightCard({ children, className }: { children: React.ReactNo
         ry.set(0);
       }}
       style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
-      className={cn("group relative overflow-hidden rounded-3xl border bg-card transition-colors hover:border-accent/40", className)}
+      className={cn("group relative overflow-hidden rounded-3xl glass transition-colors hover:border-accent/40", className)}
     >
       <motion.div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background }} />
       {children}

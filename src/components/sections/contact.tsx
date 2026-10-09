@@ -21,7 +21,7 @@ export function Contact() {
         title={
           <>
             Let&apos;s build something{" "}
-            <span className="font-serif font-normal italic text-accent">reliable.</span>
+            <span className="text-gradient">reliable.</span>
           </>
         }
         description="Whether it's a role, a project or just a question about testing IoT systems — my inbox is open."
@@ -34,7 +34,7 @@ export function Contact() {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="group flex items-center gap-4 rounded-2xl border bg-card p-5 transition-colors hover:border-accent/40"
+              className="group flex items-center gap-4 rounded-2xl glass p-5 transition-colors hover:border-accent/40"
             >
               <span className="grid size-10 place-items-center rounded-full bg-muted">
                 <Icon className="size-4" />

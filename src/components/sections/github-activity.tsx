@@ -28,7 +28,7 @@ export async function GitHubActivity() {
 
       <div className="grid gap-4 lg:grid-cols-[1fr_1.6fr]">
         <Reveal>
-          <div className="flex h-full flex-col rounded-3xl border bg-card p-7">
+          <div className="flex h-full flex-col rounded-3xl glass p-7">
             <a href={site.socials.github} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3">
               <SiGithub className="size-8" />
               <span>
@@ -68,7 +68,7 @@ export async function GitHubActivity() {
         <div className="grid gap-4 sm:grid-cols-2">
           {data.recent.map((r, i) => (
             <Reveal key={r.name} delay={0.05 * i}>
-              <a href={r.url} target="_blank" rel="noreferrer" className="group flex h-full flex-col rounded-3xl border bg-card p-6 transition-colors hover:border-accent/40">
+              <a href={r.url} target="_blank" rel="noreferrer" className="group flex h-full flex-col rounded-3xl glass p-6 transition-colors hover:border-accent/40">
                 <div className="flex items-start justify-between gap-2">
                   <p className="font-mono text-sm font-medium break-all">{r.name}</p>
                   <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

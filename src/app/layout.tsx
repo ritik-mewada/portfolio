@@ -1,23 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CommandMenuLoader } from "@/components/command-menu-loader";
+import { QaLensLoader } from "@/components/qa-lens-loader";
 import { Footer } from "@/components/footer";
+import { Wallpaper } from "@/components/wallpaper";
 import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+// Inter is the closest open font to Apple's SF Pro.
+const inter = Inter({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-});
 
 const description = `${site.name} — ${site.summary}`;
 
@@ -59,8 +56,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f9f8f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#121318" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f7fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#050608" },
   ],
 };
 
@@ -86,7 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+      className={`${inter.variable} ${geistMono.variable} antialiased`}
     >
       <body className="flex min-h-svh flex-col">
         <script
@@ -100,6 +97,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <Providers>
+          <Wallpaper />
           <ScrollProgress />
           <Navbar />
           <main id="main" className="flex-1">
@@ -107,6 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <Footer />
           <CommandMenuLoader />
+          <QaLensLoader />
         </Providers>
         <Analytics />
         <SpeedInsights />

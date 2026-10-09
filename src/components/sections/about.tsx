@@ -13,7 +13,7 @@ export function About() {
         title={
           <>
             Developer by trade,{" "}
-            <span className="font-serif font-normal italic text-accent">tester by instinct.</span>
+            <span className="text-gradient">tester by instinct.</span>
           </>
         }
       />
@@ -36,7 +36,7 @@ export function About() {
           <div className="grid grid-cols-2 gap-4">
             {site.stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.06}>
-                <div className="h-full rounded-2xl border bg-card p-5">
+                <div className="h-full rounded-2xl glass p-5">
                   <p className="text-4xl font-semibold tracking-tight">
                     <Counter value={s.value} suffix={s.suffix} />
                   </p>
@@ -47,7 +47,7 @@ export function About() {
           </div>
           {education.map((e, i) => (
             <Reveal key={e.school} delay={0.2 + i * 0.06}>
-              <div className="flex gap-4 rounded-2xl border bg-card p-5">
+              <div className="flex gap-4 rounded-2xl glass p-5">
                 <GraduationCap className="mt-0.5 size-5 shrink-0 text-accent" />
                 <div>
                   <p className="font-medium">{e.credential}</p>
