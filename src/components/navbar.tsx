@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
+// Visitor theme picker: disabled for now (see src/themes/index.ts).
+// import { ThemePicker } from "@/components/theme-picker";
 import { site } from "@/content/site";
 import { navItems, OPEN_COMMAND_MENU, QA_LENS_STATE, TOGGLE_QA_LENS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
@@ -105,6 +107,7 @@ export function Navbar() {
           >
             <ScanSearch className="size-4" />
           </button>
+          {/* <ThemePicker /> */}
           <ThemeToggle />
           <button
             type="button"
