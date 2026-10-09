@@ -1,6 +1,6 @@
 import { cacheLife } from "next/cache";
 
-export type GitHubSummary = {
+type GitHubSummary = {
   publicRepos: number;
   followers: number;
   languages: { name: string; count: number }[];
@@ -20,14 +20,13 @@ export async function getGitHubSummary(username: string): Promise<GitHubSummary 
   "use cache";
   cacheLife("hours");
 
-  const api = process.env.GITHUB_API_URL ?? "https://api.github.com";
   const headers: HeadersInit = { Accept: "application/vnd.github+json" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
   try {
     const [userRes, reposRes] = await Promise.all([
-      fetch(`${api}/users/${username}`, { headers }),
-      fetch(`${api}/users/${username}/repos?per_page=100&sort=pushed`, { headers }),
+      fetch(`https://api.github.com/users/${username}`, { headers }),
+      fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`, { headers }),
     ]);
     if (!userRes.ok || !reposRes.ok) return null;
 
