@@ -7,7 +7,8 @@ export const site = {
   initials: "RM",
   role: "Software Engineer",
   rotatingRoles: [
-    "IoT QA & Software Validation",
+    "Quality Assurance Engineering",
+    "IoT & Hardware Testing",
     "Full-Stack Development",
     "Test Automation",
     "Front-End Architecture",
@@ -16,7 +17,7 @@ export const site = {
     "Software engineer with 4+ years across full-stack development and quality engineering. I've shipped React, Next.js and Node.js products for marketplaces, analytics platforms and SaaS tools — and today I validate IoT systems for digital mining at Maestro Digital Mine.",
   about: [
     "I started out writing React dashboards and REST APIs, and over the years grew into owning front-end architecture, design systems and CI/CD pipelines for products used by thousands of people.",
-    "Building things taught me how they break. That's what pulled me toward quality engineering: I now design test strategies and automation for IoT devices and the software around them, where a missed bug isn't just a bad UX — it's an underground operation flying blind.",
+    "Building things taught me how they break. That's what pulled me toward quality engineering: I now test the sensors, devices and networks behind underground mining operations, where a missed bug isn't just a bad UX — it's a gas reading nobody sees.",
     "I like work that sits between the two worlds: developer-minded testing, test-minded development.",
   ],
   location: "Ontario, Canada",
@@ -52,20 +53,21 @@ type Experience = {
 export const experience: Experience[] = [
   {
     company: "Maestro Digital Mine",
-    role: "IoT QA / Software Validation Engineer",
+    role: "Quality Assurance Engineer",
     url: "https://maestrodigitalmine.com",
     location: "Ontario, Canada",
     start: "Jul 2026",
     end: "Present",
     current: true,
     summary:
-      "Validating the IoT devices, firmware and software that power real-time monitoring and control in underground mines.",
+      "Testing the hardware, sensors and networks behind real-time safety monitoring in underground mines.",
     highlights: [
-      "Plan and execute test strategies for connected IoT devices and the software that configures and monitors them.",
-      "Build automated UI and API regression suites with Playwright and TypeScript to catch defects before release.",
-      "Verify device-to-cloud data flows end to end and partner with engineering to reproduce, triage and close defects.",
+      "Test hardware devices end to end, validating gas and airflow sensors to make sure every reading is accurate and reliable.",
+      "Validate the network stack that connects the devices, checking it holds up under every condition — from normal operation to degraded and failure scenarios.",
+      "Verify device communication over industrial protocols including Modbus, TCP/IP and MQTT.",
+      "Own test management in Jira: write and maintain test cases, log reproducible bugs and track them through to resolution.",
     ],
-    stack: ["Playwright", "TypeScript", "IoT", "API Testing", "Test Planning"],
+    stack: ["Hardware Testing", "Gas & Airflow Sensors", "Modbus", "TCP/IP", "MQTT", "Jira"],
   },
   {
     company: "HRX Connect",
@@ -164,7 +166,11 @@ export const skills: SkillGroup[] = [
   },
   {
     title: "Quality & Testing",
-    items: ["Playwright", "Cypress", "Jest", "React Testing Library", "Postman", "API Testing"],
+    items: ["Playwright", "Cypress", "Jest", "React Testing Library", "Postman", "Jira", "Test Case Design"],
+  },
+  {
+    title: "IoT & Protocols",
+    items: ["Hardware Testing", "Sensor Validation", "Network Testing", "Modbus", "TCP/IP", "MQTT"],
   },
   {
     title: "Cloud & DevOps",
