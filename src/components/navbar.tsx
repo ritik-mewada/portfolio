@@ -51,7 +51,7 @@ export function Navbar() {
       >
         <Link href="/" className="flex items-center gap-2 pl-2 font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
           {site.photo ? (
-            <ProfilePhoto sizes="28px" className="size-7 rounded-full" />
+            <ProfilePhoto avatar decorative sizes="28px" className="size-7 rounded-full" />
           ) : (
             <span className="grid size-7 place-items-center rounded-full bg-accent font-mono text-[11px] text-accent-foreground">
               {site.initials}

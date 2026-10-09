@@ -118,7 +118,7 @@ export function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr] lg:pr-20 xl:pr-8">
         <div>
-          <ProfilePhoto sizes="96px" className="animate-fade-up mb-6 size-24 rounded-3xl text-2xl ring-1 ring-border lg:hidden" />
+          <ProfilePhoto avatar sizes="96px" className="animate-fade-up mb-6 size-24 rounded-3xl text-2xl ring-1 ring-border lg:hidden" />
 
           {current && (
             <a
@@ -191,10 +191,10 @@ export function Hero() {
           <div {...fade(0.15)} className="animate-fade-up glass rounded-[32px] p-2.5">
             <ProfilePhoto priority sizes="340px" className="aspect-[4/5] w-full rounded-3xl text-6xl" />
           </div>
-          <span className="glass absolute top-5 right-5 flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium">
+          <span className="glass absolute top-5 right-5 flex !bg-background/80 items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium">
             <span className="size-2 rounded-full bg-green-500" /> {site.availability}
           </span>
-          <TestRunnerCard className="absolute bottom-0 -left-12 w-[330px] text-[11.5px]" />
+          <TestRunnerCard className="absolute bottom-0 -left-12 w-[330px] !bg-background/80 text-[11.5px]" />
         </div>
       </div>
     </section>

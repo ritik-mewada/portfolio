@@ -2,8 +2,22 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-/** The profile photo, or an initials placeholder until `site.photo` is set. */
-export function ProfilePhoto({ className, sizes, priority = false }: { className?: string; sizes: string; priority?: boolean }) {
+/** The profile photo (portrait, or the face crop for small spots), or an initials placeholder when unset. */
+export function ProfilePhoto({
+  className,
+  sizes,
+  priority = false,
+  avatar = false,
+  decorative = false,
+}: {
+  className?: string;
+  sizes: string;
+  priority?: boolean;
+  avatar?: boolean;
+  /** Set when the name is already shown next to the photo. */
+  decorative?: boolean;
+}) {
+  const src = avatar ? (site.avatar ?? site.photo) : site.photo;
   return (
     <div
       className={cn(
@@ -11,8 +25,8 @@ export function ProfilePhoto({ className, sizes, priority = false }: { className
         className,
       )}
     >
-      {site.photo ? (
-        <Image src={site.photo} alt={site.name} fill sizes={sizes} priority={priority} className="object-cover" />
+      {src ? (
+        <Image src={src} alt={decorative ? "" : site.name} fill sizes={sizes} priority={priority} className="object-cover" />
       ) : (
         <span aria-label={site.name} role="img" className="text-[length:inherit] font-semibold tracking-wide">
           {site.initials}
