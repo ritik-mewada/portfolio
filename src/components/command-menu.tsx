@@ -12,6 +12,7 @@ import {
   Mail,
   Monitor,
   Moon,
+  ScanSearch,
   Sparkles,
   Sun,
   User,
@@ -23,7 +24,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { toast } from "sonner";
 import { projects, site } from "@/content/site";
-import { OPEN_COMMAND_MENU } from "@/lib/nav";
+import { OPEN_COMMAND_MENU, TOGGLE_QA_LENS } from "@/lib/nav";
 
 const sectionIcons = {
   about: User,
@@ -80,7 +81,7 @@ export function CommandMenu({ defaultOpen = false }: { defaultOpen?: boolean }) 
       onOpenChange={setOpen}
       label="Command menu"
       overlayClassName="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm"
-      contentClassName="fixed top-[15vh] left-1/2 z-[80] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 overflow-hidden rounded-2xl border bg-card shadow-2xl"
+      contentClassName="fixed top-[15vh] left-1/2 z-[80] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 overflow-hidden rounded-2xl glass shadow-2xl"
     >
       <Command.Input
         placeholder="Type a command or search…"
@@ -123,6 +124,10 @@ export function CommandMenu({ defaultOpen = false }: { defaultOpen?: boolean }) 
         </Command.Group>
 
         <Command.Group heading="Actions" className="cmdk-group">
+          <Command.Item className={itemClass} onSelect={() => run(() => window.dispatchEvent(new Event(TOGGLE_QA_LENS)))}>
+            <ScanSearch className="size-4" /> Toggle QA Lens
+            <span className="ml-auto font-mono text-xs opacity-60">⌘L</span>
+          </Command.Item>
           <Command.Item
             className={itemClass}
             onSelect={() =>
