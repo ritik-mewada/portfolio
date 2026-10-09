@@ -7,6 +7,7 @@ import { QaLensLoader } from "@/components/qa-lens-loader";
 import { Footer } from "@/components/footer";
 import { Wallpaper } from "@/components/wallpaper";
 import { Navbar } from "@/components/navbar";
+import { PageNavigation } from "@/components/page-navigation";
 import { Providers } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { site } from "@/content/site";
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
           <CommandMenuLoader />
           <QaLensLoader />
+          <PageNavigation />
         </Providers>
         <Analytics />
         <SpeedInsights />

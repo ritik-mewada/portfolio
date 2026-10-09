@@ -10,9 +10,9 @@
   --muted-foreground: #5d5d63;
   --card: rgba(255, 255, 255, 0.45);
   --border: rgba(255, 255, 255, 0.75);
-  --accent: #0071e3;
+  --accent: #0066cc;
   --accent-foreground: #ffffff;
-  --accent-soft: rgba(0, 113, 227, 0.14);
+  --accent-soft: rgba(0, 102, 204, 0.14);
   --grid: rgba(29, 29, 31, 0.05);
   --glass-shine: rgba(255, 255, 255, 0.95);
   --glass-edge-low: rgba(255, 255, 255, 0.25);
@@ -34,7 +34,7 @@
   --card: rgba(255, 255, 255, 0.06);
   --border: rgba(255, 255, 255, 0.14);
   --accent: #2997ff;
-  --accent-foreground: #ffffff;
+  --accent-foreground: #001a33;
   --accent-soft: rgba(41, 151, 255, 0.18);
   --grid: rgba(245, 245, 247, 0.04);
   --glass-shine: rgba(255, 255, 255, 0.22);
@@ -198,7 +198,8 @@ html.lenis body {
 
 /* ---------- QA Lens ---------- */
 .qa-xray {
-  position: absolute;
+  position: fixed;
+  inset: 0;
   z-index: 55;
   overflow: hidden;
   pointer-events: none;
@@ -223,15 +224,16 @@ html.lenis body {
   opacity: 1 !important;
 }
 .qa-xray svg { opacity: 0.55 !important; }
+.qa-xray-inner { position: absolute; left: 0; top: 0; }
 .qa-xray [data-qa] { position: relative; outline: 1px dashed #4fd1ff; outline-offset: 2px; }
 .qa-xray section[data-qa] { outline-color: rgba(79, 209, 255, 0.35); outline-offset: -8px; }
 .qa-xray [data-qa]::after,
 .qa-xray [data-qa-ok]::before {
   position: absolute;
   z-index: 3;
-  padding: 3px 6px;
+  padding: 2px 4px;
   border-radius: 4px;
-  font: 600 10px/1 var(--font-mono), ui-monospace, monospace;
+  font: 600 9px/1 var(--font-mono), ui-monospace, monospace;
   letter-spacing: 0;
   text-transform: none;
   white-space: nowrap;
@@ -260,7 +262,7 @@ html.lenis body {
   z-index: 56;
   border-radius: 50%;
   pointer-events: none;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
     inset 0 0 0 6px rgba(255, 255, 255, 0.16),
     inset 10px 14px 24px rgba(255, 255, 255, 0.3),
@@ -280,3 +282,10 @@ html.lenis body {
   transform: rotate(-24deg);
 }
 .qa-lens-touch { pointer-events: auto; touch-action: none; cursor: grab; }
+
+/* Drag-to-scroll (see PageNavigation) */
+html.page-dragging,
+html.page-dragging * {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
