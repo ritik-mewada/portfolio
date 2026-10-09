@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight, Copy, FileText } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Copy, FileText, MapPin } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -176,7 +176,10 @@ export function Hero() {
             </button>
           </motion.div>
 
-          <motion.div {...fade(0.45)} className="mt-10 flex items-center gap-5 text-muted-foreground">
+          <motion.div {...fade(0.45)} className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-muted-foreground">
+            <span className="inline-flex items-center gap-2 text-sm">
+              <MapPin className="size-4 text-accent" /> {site.location}
+            </span>
             <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm transition-colors hover:text-foreground">
               <SiGithub className="size-4" /> GitHub <ArrowUpRight className="size-3" />
             </a>
