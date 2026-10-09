@@ -224,6 +224,13 @@ html.lenis body {
   opacity: 1 !important;
 }
 .qa-xray svg { opacity: 0.55 !important; }
+/* Keep the marquee's animation in the mirror; QaLens syncs its position to the page. */
+.qa-xray .animate-marquee {
+  animation-name: marquee !important;
+  animation-duration: 40s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+}
 .qa-xray-inner { position: absolute; left: 0; top: 0; }
 .qa-xray [data-qa] { position: relative; outline: 1px dashed #4fd1ff; outline-offset: 2px; }
 .qa-xray section[data-qa] { outline-color: rgba(79, 209, 255, 0.35); outline-offset: -8px; }
