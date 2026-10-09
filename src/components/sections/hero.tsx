@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUpRight, Copy, FileText, MapPin, ScanSearch } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Copy, FileText, MapPin } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { toast } from "sonner";
 import { experience, site } from "@/content/site";
-import { TOGGLE_QA_LENS } from "@/lib/nav";
 
 const current = experience.find((e) => e.current);
 
@@ -79,20 +78,11 @@ function TestRunnerCard() {
             <span className="ml-auto text-muted-foreground">{l.ms}ms</span>
           </motion.p>
         ))}
-        <p className="flex items-center justify-between gap-3 pt-2">
-          {finished ? (
-            <span className="text-accent">{testLines.length} passed · ready to ship</span>
-          ) : (
-            <span className="inline-block h-4 w-2 animate-blink bg-foreground/70 align-middle" />
-          )}
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new Event(TOGGLE_QA_LENS))}
-            className="rounded-full bg-accent px-3 py-1 font-sans text-xs font-semibold text-accent-foreground"
-          >
-            Inspect this page
-          </button>
-        </p>
+        {finished ? (
+          <p className="pt-2 text-accent">{testLines.length} passed · ready to ship</p>
+        ) : (
+          <span className="inline-block h-4 w-2 animate-blink bg-foreground/70 align-middle" />
+        )}
       </div>
     </motion.div>
   );
@@ -191,21 +181,6 @@ export function Hero() {
               <FaLinkedinIn className="size-4" /> LinkedIn <ArrowUpRight className="size-3" />
             </a>
           </div>
-
-          <button
-            type="button"
-            {...fade(0.55)}
-            onClick={() => window.dispatchEvent(new Event(TOGGLE_QA_LENS))}
-            className="animate-fade-up glass group mt-8 inline-flex max-w-full items-center gap-3 rounded-full py-2 pr-4 pl-2 text-left text-sm"
-          >
-            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
-              <ScanSearch className="size-4" />
-            </span>
-            <span>
-              <span className="font-semibold">Try the QA Lens.</span>{" "}
-              <span className="text-muted-foreground">See this page the way I test software.</span>
-            </span>
-          </button>
         </div>
 
         <div className="flex justify-center lg:justify-end">
