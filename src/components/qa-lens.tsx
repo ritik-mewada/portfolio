@@ -72,6 +72,18 @@ export function QaLens({ onClose }: { onClose: () => void }) {
     layer.append(mainMirror, headerMirror);
     document.body.appendChild(layer);
 
+    // Continuously animated elements (the skills marquee) must stay in step with the page.
+    let marquees: [Element, HTMLElement][] = [];
+    const syncMarquees = () => {
+      for (const [orig, copy] of marquees) {
+        const a = orig.getAnimations()[0];
+        const c = copy.getAnimations()[0];
+        if (!a || !c) continue;
+        c.pause();
+        c.currentTime = a.currentTime;
+      }
+    };
+
     let cx = window.innerWidth * 0.5;
     let cy = window.innerHeight * 0.42;
     let built = false;
@@ -90,6 +102,7 @@ export function QaLens({ onClose }: { onClose: () => void }) {
         headerMirror.style.width = `${h.width}px`;
         headerMirror.style.transform = `translate(${h.left}px, ${h.top}px)`;
       }
+      syncMarquees();
       lens.style.width = lens.style.height = `${rad * 2}px`;
       lens.style.transform = `translate(${cx - rad}px, ${cy - rad}px)`;
     };
@@ -103,15 +116,29 @@ export function QaLens({ onClose }: { onClose: () => void }) {
         if (clone) clone.className = "px-4 pt-4";
         if (clone) annotate(header, clone);
       }
+      const origMarquees = main.querySelectorAll(".animate-marquee");
+      const copyMarquees = mainMirror.querySelectorAll<HTMLElement>(".animate-marquee");
+      marquees = [...origMarquees].map((el, i) => [el, copyMarquees[i]] as [Element, HTMLElement]).filter(([, c]) => c);
+      for (const [orig, copy] of marquees) {
+        copy.style.setProperty("animation-direction", getComputedStyle(orig).animationDirection, "important");
+      }
       // Strip ids after matching so the mirror never duplicates them in the document.
       layer.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
       built = true;
       place();
     };
 
+    // Keep animated copies in step every frame while the lens is showing (cheap: two elements).
+    let frame = 0;
+    const tick = () => {
+      syncMarquees();
+      frame = requestAnimationFrame(tick);
+    };
+
     const show = () => {
       if (visible) return;
       visible = true;
+      frame = requestAnimationFrame(tick);
       lens.hidden = false;
       layer.style.display = "block";
       if (!built) build();
@@ -182,6 +209,7 @@ export function QaLens({ onClose }: { onClose: () => void }) {
     lens.addEventListener("pointerdown", onLensDown);
 
     return () => {
+      cancelAnimationFrame(frame);
       mo.disconnect();
       window.clearTimeout(quiet);
       window.removeEventListener("pointermove", onMove);
