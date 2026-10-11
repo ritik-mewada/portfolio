@@ -48,9 +48,20 @@ export function Navbar() {
         aria-label="Main"
         className="glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-3 py-2"
       >
-        <Link href="/" className="flex items-center gap-2 pl-2 font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
-          <span className="grid size-7 place-items-center rounded-full bg-accent font-mono text-[11px] text-accent-foreground">
-            {site.initials}
+        <Link
+          href="/"
+          aria-label={site.name}
+          className="flex items-center gap-2.5 pl-1 font-semibold tracking-tight"
+          onClick={() => setMobileOpen(false)}
+        >
+          {/* Terminal-prompt mark: "$ rm" with a blinking cursor. */}
+          <span
+            aria-hidden
+            className="flex h-7 items-center gap-0.5 rounded-lg border border-white/15 bg-[#0b0d14] px-2 font-mono text-[12px] font-bold text-[#f5f5f7] dark:bg-[#0b0d14]"
+          >
+            <span className="mr-1 text-[#22c55e]">$</span>
+            {site.initials.toLowerCase()}
+            <span className="ml-0.5 inline-block h-3.5 w-[7px] animate-blink bg-accent" />
           </span>
           <span className="hidden sm:inline">{site.name}</span>
         </Link>
