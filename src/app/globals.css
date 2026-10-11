@@ -233,36 +233,52 @@ html.lenis body {
   animation-iteration-count: infinite !important;
 }
 .qa-xray-inner { position: absolute; left: 0; top: 0; }
-.qa-xray [data-qa] { position: relative; outline: 1px dashed #4fd1ff; outline-offset: 2px; }
-.qa-xray section[data-qa] { outline-color: rgba(79, 209, 255, 0.35); outline-offset: -8px; }
-.qa-xray [data-qa]::after,
-.qa-xray [data-qa-ok]::before {
-  position: absolute;
-  z-index: 3;
-  padding: 2px 4px;
-  border-radius: 4px;
-  font: 600 9px/1 var(--font-mono), ui-monospace, monospace;
+/* In-lens inspector: the hovered element's source and a QA readout. */
+.qa-xray .qa-shade {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 21, 43, 0.9) !important;
+}
+.qa-xray .qa-target {
+  position: fixed;
+  border: 1px dashed rgba(79, 209, 255, 0.45) !important;
+  border-radius: 6px;
+}
+.qa-xray .qa-src,
+.qa-xray .qa-readout {
+  position: fixed;
+  transform: translateX(-50%);
+  margin: 0;
+  font: 500 11px/1.55 var(--font-mono), ui-monospace, monospace;
   letter-spacing: 0;
-  text-transform: none;
-  white-space: nowrap;
 }
-.qa-xray [data-qa]::after {
-  content: attr(data-qa);
-  left: 0;
-  top: -18px;
-  background: #4fd1ff !important;
-  color: #07152b !important;
-  -webkit-text-fill-color: #07152b !important;
+.qa-xray .qa-src {
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
-.qa-xray section[data-qa]::after { top: 12px; left: 12px; }
-.qa-xray [data-qa-ok]::before {
-  content: attr(data-qa-ok);
-  right: 0;
-  bottom: -18px;
-  background: #30d158 !important;
-  color: #04210d !important;
-  -webkit-text-fill-color: #04210d !important;
+.qa-xray .qa-readout {
+  padding: 4px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(79, 209, 255, 0.4) !important;
+  background: rgba(4, 12, 26, 0.95) !important;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
 }
+.qa-xray .qa-readout > span:first-child {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.qa-xray .qa-t { color: #7ee787 !important; -webkit-text-fill-color: #7ee787 !important; }
+.qa-xray .qa-k { color: #79c0ff !important; -webkit-text-fill-color: #79c0ff !important; }
+.qa-xray .qa-v { color: #a5d6ff !important; -webkit-text-fill-color: #a5d6ff !important; }
+.qa-xray .qa-x { color: #e6edf3 !important; -webkit-text-fill-color: #e6edf3 !important; }
+.qa-xray .qa-m { color: #6e8bb3 !important; -webkit-text-fill-color: #6e8bb3 !important; }
+.qa-xray .qa-ok { color: #30d158 !important; -webkit-text-fill-color: #30d158 !important; }
+.qa-xray .qa-bad { color: #ff6b6b !important; -webkit-text-fill-color: #ff6b6b !important; }
 .qa-lens {
   position: fixed;
   left: 0;
