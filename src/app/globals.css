@@ -180,6 +180,7 @@ html.lenis body {
   body {
     background: white !important;
     color: black !important;
+    color-scheme: light !important;
   }
   @page {
     margin: 14mm;
