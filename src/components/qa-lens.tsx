@@ -9,7 +9,15 @@ import { useEffect, useRef } from "react";
 // circle following the pointer. Keeping the layer viewport-sized (not as tall
 // as the page) avoids browser limits on painting very tall clipped layers.
 
-const ANNOTATE = "section[id], h1, h2, h3, a, button, input, textarea, img";
+const ANNOTATE = "section[id], h1, h2, h3, p, a, button, input, textarea, img";
+
+// Labels read like the element's real opening tag, e.g. <a href="#projects">.
+function openTag(el: Element, attr?: string) {
+  const tag = el.tagName.toLowerCase();
+  const value = attr && el.getAttribute(attr);
+  if (!value) return `<${tag}>`;
+  return `<${tag} ${attr}="${value.length > 18 ? `${value.slice(0, 17)}…` : value}">`;
+}
 
 function accessibleName(el: Element) {
   return (
@@ -28,23 +36,28 @@ function hasLabel(el: Element) {
 function annotate(src: Element, dst: Element) {
   const from = src.querySelectorAll(ANNOTATE);
   const to = dst.querySelectorAll(ANNOTATE);
+  const origin = src.getBoundingClientRect();
   from.forEach((el, i) => {
     const d = to[i] as HTMLElement | undefined;
     const b = el.getBoundingClientRect();
     if (!d || !b.width) return;
+    // Position within the mirror, so labels can slide to stay inside the lens (see CSS).
+    d.style.setProperty("--qa-x", `${b.left - origin.left}px`);
+    d.style.setProperty("--qa-y", `${b.top - origin.top}px`);
     const tag = el.tagName.toLowerCase();
-    if (tag === "section") d.dataset.qa = `section#${el.id}`;
-    else if (/^h[1-3]$/.test(tag)) {
+    if (tag === "section") d.dataset.qa = openTag(el, "id");
+    else if (/^(h[1-3]|p)$/.test(tag)) {
       const cs = getComputedStyle(el);
-      d.dataset.qa = `${tag} · ${Math.round(parseFloat(cs.fontSize))}px / ${cs.fontWeight}`;
+      d.dataset.qa = `${openTag(el)} ${Math.round(parseFloat(cs.fontSize))}px · ${cs.fontWeight}`;
     } else if (tag === "img") {
-      d.dataset.qa = "img";
+      d.dataset.qa = openTag(el, "alt");
       d.dataset.qaOk = el.hasAttribute("alt") ? "alt ✓" : "missing alt ✗";
     } else if (tag === "input" || tag === "textarea") {
-      d.dataset.qa = tag;
+      d.dataset.qa = openTag(el, "type");
       d.dataset.qaOk = hasLabel(el) ? "labelled ✓" : "no label ✗";
     } else {
-      d.dataset.qa = `${tag} · ${Math.round(b.width)}×${Math.round(b.height)}`;
+      const attr = el.hasAttribute("href") ? "href" : el.hasAttribute("aria-label") ? "aria-label" : undefined;
+      d.dataset.qa = `${openTag(el, attr)} ${Math.round(b.width)}×${Math.round(b.height)}`;
       if (accessibleName(el) && b.height >= 24) d.dataset.qaOk = "named · target ✓";
     }
   });
@@ -97,10 +110,17 @@ export function QaLens({ onClose }: { onClose: () => void }) {
       layer.style.clipPath = `circle(${rad}px at ${cx}px ${cy}px)`;
       mainMirror.style.width = `${r.width}px`;
       mainMirror.style.transform = `translate(${r.left}px, ${r.top}px)`;
+      // Where labels should sit: a band across the upper part of the lens, in mirror coordinates.
+      const lensVars = (el: HTMLElement, left: number, top: number) => {
+        el.style.setProperty("--lens-x", `${cx - left - rad * 0.8}px`);
+        el.style.setProperty("--lens-y", `${cy - top - rad * 0.5}px`);
+      };
+      lensVars(mainMirror, r.left, r.top);
       if (header) {
         const h = header.getBoundingClientRect();
         headerMirror.style.width = `${h.width}px`;
         headerMirror.style.transform = `translate(${h.left}px, ${h.top}px)`;
+        lensVars(headerMirror, h.left, h.top);
       }
       syncMarquees();
       lens.style.width = lens.style.height = `${rad * 2}px`;

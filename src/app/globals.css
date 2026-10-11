@@ -248,8 +248,9 @@ html.lenis body {
 }
 .qa-xray [data-qa]::after {
   content: attr(data-qa);
-  left: 0;
-  top: -18px;
+  /* Slide along the element to stay inside the lens, but never leave the element's box. */
+  left: clamp(0px, calc(var(--lens-x, 0px) - var(--qa-x, 0px)), max(0px, calc(100% - 9em)));
+  top: clamp(-18px, calc(var(--lens-y, -18px) - var(--qa-y, 0px)), max(-18px, calc(100% - 14px)));
   background: #4fd1ff !important;
   color: #07152b !important;
   -webkit-text-fill-color: #07152b !important;
