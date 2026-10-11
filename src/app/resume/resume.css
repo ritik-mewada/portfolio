@@ -1,0 +1,156 @@
+/* A web take on the classic Overleaf "Jake's Resume" LaTeX template. */
+
+.cv-sheet {
+  width: 100%;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.5in 0.55in;
+  background: #fff;
+  color: #000;
+  font-size: 10.5pt;
+  line-height: 1.25;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.08),
+    0 12px 40px rgb(0 0 0 / 0.12);
+}
+
+.cv-sheet a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.5px;
+}
+
+/* ---------- Heading ---------- */
+.cv-header {
+  text-align: center;
+}
+
+.cv-name {
+  font-size: 25pt;
+  font-weight: 700;
+  font-variant: small-caps;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6pt;
+  font-size: 9pt;
+}
+
+.cv-contact span {
+  white-space: nowrap;
+}
+
+.cv-contact span + span::before {
+  content: "|";
+  margin: 0 0.4em;
+}
+
+/* ---------- Sections ---------- */
+.cv-section {
+  margin-top: 9pt;
+}
+
+.cv-section-title {
+  font-size: 13pt;
+  font-weight: 500;
+  font-variant: small-caps;
+  border-bottom: 0.6pt solid #000;
+  padding-bottom: 1pt;
+  margin-bottom: 5pt;
+}
+
+.cv-summary {
+  font-size: 10pt;
+  text-align: justify;
+}
+
+/* ---------- Entries ---------- */
+.cv-entry {
+  margin-bottom: 6pt;
+  break-inside: avoid;
+}
+
+.cv-entry:last-child {
+  margin-bottom: 0;
+}
+
+.cv-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 1em;
+}
+
+.cv-row > :last-child {
+  margin-left: auto;
+  text-align: right;
+}
+
+.cv-strong {
+  font-weight: 700;
+}
+
+.cv-sub {
+  font-size: 9.5pt;
+  font-style: italic;
+}
+
+.cv-bullets {
+  margin: 2pt 0 0;
+  padding-left: 1.6em;
+  list-style: disc;
+  font-size: 9.5pt;
+}
+
+.cv-bullets li {
+  margin-top: 1pt;
+  padding-left: 0.15em;
+}
+
+.cv-bullets li::marker {
+  font-size: 0.8em;
+}
+
+/* ---------- Skills ---------- */
+.cv-skills {
+  margin: 0;
+  font-size: 9.5pt;
+}
+
+.cv-skills div + div {
+  margin-top: 1.5pt;
+}
+
+.cv-skills dt {
+  display: inline;
+  font-weight: 700;
+}
+
+.cv-skills dd {
+  display: inline;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .cv-sheet {
+    padding: 28px 20px;
+    font-size: 10pt;
+  }
+  .cv-name {
+    font-size: 22pt;
+  }
+}
+
+@media print {
+  .cv-sheet {
+    max-width: none;
+    padding: 0;
+    box-shadow: none;
+  }
+}
