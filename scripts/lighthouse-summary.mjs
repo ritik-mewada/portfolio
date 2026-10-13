@@ -13,7 +13,7 @@ const score = (n) => (n == null ? "–" : Math.round(n * 100));
 const ms = (n) => (n < 1000 ? `${Math.round(n)} ms` : `${(n / 1000).toFixed(2)} s`);
 
 const lines = [
-  "## Lighthouse (median run per page)",
+  "## Lighthouse (representative run per page)",
   "",
   "| Page | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |",
   "| --- | --- | --- | --- | --- | --- | --- | --- |",
