@@ -45,3 +45,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local notes and agent instructions (kept out of git)
+TODO.md
+AGENTS.md
