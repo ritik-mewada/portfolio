@@ -30,7 +30,7 @@ export async function GitHubActivity() {
         <Reveal>
           <div className="flex h-full flex-col rounded-3xl glass p-7">
             <a href={site.socials.github} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3">
-              <SiGithub className="size-8" />
+              <SiGithub aria-hidden className="size-8" />
               <span>
                 <span className="block font-semibold">@{site.githubUsername}</span>
                 <span className="text-sm text-muted-foreground group-hover:text-foreground">View profile ↗</span>
