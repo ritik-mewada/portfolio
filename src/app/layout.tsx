@@ -54,6 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: `${site.name} — ${site.role}`, description: site.summary },
   robots: { index: true, follow: true },
+  // Google Search Console ownership check.
+  verification: { google: "PbD3YCY30p2-_Wy1ocgSUy_DMhxg8iTX4OVm-Rddyzs" },
 };
 
 export const viewport: Viewport = {
