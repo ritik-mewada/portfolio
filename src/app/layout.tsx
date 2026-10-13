@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer";
 import { Wallpaper } from "@/components/wallpaper";
 import { Navbar } from "@/components/navbar";
 import { PageNavigation } from "@/components/page-navigation";
-import { Providers } from "@/components/providers";
+import { Providers, ThemeProvider } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Umami } from "@/components/umami";
 import { site } from "@/content/site";
@@ -101,12 +101,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Providers>
           <Wallpaper />
           <ScrollProgress />
-          <Navbar />
+          {/* The only theme consumers (the toggle and the command menu); see providers.tsx. */}
+          <ThemeProvider>
+            <Navbar />
+            <CommandMenuLoader />
+          </ThemeProvider>
           <main id="main" className="flex-1">
             {children}
           </main>
           <Footer />
-          <CommandMenuLoader />
           <QaLensLoader />
           <PageNavigation />
         </Providers>
