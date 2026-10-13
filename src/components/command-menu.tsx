@@ -142,10 +142,10 @@ export function CommandMenu({ defaultOpen = false }: { defaultOpen?: boolean }) 
             <Copy className="size-4" /> Copy email address
           </Command.Item>
           <Command.Item className={itemClass} onSelect={() => run(() => window.open(site.socials.github, "_blank"))}>
-            <SiGithub className="size-4" /> GitHub <ArrowUpRight className="ml-auto size-3.5" />
+            <SiGithub aria-hidden className="size-4" /> GitHub <ArrowUpRight className="ml-auto size-3.5" />
           </Command.Item>
           <Command.Item className={itemClass} onSelect={() => run(() => window.open(site.socials.linkedin, "_blank"))}>
-            <FaLinkedinIn className="size-4" /> LinkedIn <ArrowUpRight className="ml-auto size-3.5" />
+            <FaLinkedinIn aria-hidden className="size-4" /> LinkedIn <ArrowUpRight className="ml-auto size-3.5" />
           </Command.Item>
         </Command.Group>
 

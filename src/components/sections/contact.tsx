@@ -37,7 +37,7 @@ export function Contact() {
               className="group flex items-center gap-4 rounded-2xl glass p-5 transition-colors hover:border-accent/40"
             >
               <span className="grid size-10 place-items-center rounded-full bg-muted">
-                <Icon className="size-4" />
+                <Icon aria-hidden className="size-4" />
               </span>
               <span>
                 <span className="block text-xs text-muted-foreground">{label}</span>
