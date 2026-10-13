@@ -113,7 +113,7 @@ export function Hero() {
       }}
       className="relative flex min-h-svh items-center overflow-hidden pt-28 pb-20"
     >
-      <motion.div className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
+      <motion.div data-qa-pointer-fx className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.25fr_1fr]">
         <div>
