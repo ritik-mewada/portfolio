@@ -17,7 +17,7 @@ export const site = {
     "Software engineer with 4+ years across full-stack development and quality engineering. I've shipped React, Next.js and Node.js products for marketplaces, analytics platforms and SaaS tools — and today I validate IoT systems for digital mining at Maestro Digital Mine.",
   about: [
     "I started out writing React dashboards and REST APIs, and over the years grew into owning front-end architecture, design systems and CI/CD pipelines for products used by thousands of people.",
-    "Building things taught me how they break. That's what pulled me toward quality engineering: I now test the sensors, devices and networks behind underground mining operations, where a missed bug isn't just a bad UX — it's a gas reading nobody sees.",
+    "Building things taught me how they break. That's what pulled me toward quality engineering. I now test the sensors, devices and networks used to monitor underground mines, where accurate readings matter for safety.",
     "I like work that sits between the two worlds: developer-minded testing, test-minded development.",
   ],
   location: "Ontario, Canada",
@@ -60,14 +60,14 @@ export const experience: Experience[] = [
     end: "Present",
     current: true,
     summary:
-      "Testing the hardware, sensors and networks behind real-time safety monitoring in underground mines.",
+      "Manual testing of the devices, sensors and network used for safety monitoring in underground mines.",
     highlights: [
-      "Test hardware devices end to end, validating gas and airflow sensors to make sure every reading is accurate and reliable.",
-      "Validate the network stack that connects the devices, checking it holds up under every condition — from normal operation to degraded and failure scenarios.",
-      "Verify device communication over industrial protocols including Modbus, TCP/IP and MQTT.",
-      "Own test management in Jira: write and maintain test cases, log reproducible bugs and track them through to resolution.",
+      "Write test cases and run manual tests on hardware devices, including gas and airflow sensors.",
+      "Check that devices communicate correctly over Modbus, TCP/IP and MQTT.",
+      "Use Wireshark to find the IP addresses of connected devices and to watch the traffic of a specific device.",
+      "Log bugs in Jira with clear steps to reproduce, and follow them through to a fix.",
     ],
-    stack: ["Hardware Testing", "Gas & Airflow Sensors", "Modbus", "TCP/IP", "MQTT", "Jira"],
+    stack: ["Manual Testing", "Test Cases", "Gas & Airflow Sensors", "Modbus", "TCP/IP", "MQTT", "Wireshark", "Jira"],
   },
   {
     company: "HRX Connect",
