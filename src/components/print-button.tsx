@@ -2,9 +2,11 @@
 
 import { Download } from "lucide-react";
 import { site } from "@/content/site";
+import { track } from "@/lib/analytics";
 
 export function PrintButton() {
   const print = () => {
+    track("resume_download");
     // Browsers name the saved PDF after the document title.
     const title = document.title;
     document.title = `${site.name.replace(/\s+/g, "_")}_Resume`;

@@ -1,4 +1,6 @@
+import { after } from "next/server";
 import { site } from "@/content/site";
+import { trackServerEvent } from "@/lib/analytics-server";
 import { MIN_FILL_MS, contentSpamReasons, domainAcceptsMail, isDisposable, isDuplicate, rateLimited, rememberSent } from "@/lib/spam";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -6,9 +8,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-// Bots get a normal success reply so they don't adapt; the reason goes to the server log.
-const dropSpam = (reason: string, email: string) => {
+// Bots get a normal success reply so they don't adapt; the reason goes to the server log,
+// and the kind of spam is counted in analytics once the reply has gone out.
+const dropSpam = (request: Request, kind: string, reason: string, email: string) => {
   console.warn(`[contact] dropped spam (${reason}) from ${email || "unknown"}`);
+  after(() => trackServerEvent(request, "contact_blocked", { reason: kind }));
   return Response.json({ ok: true });
 };
 
@@ -27,10 +31,10 @@ export async function POST(request: Request) {
   const page = str(body.page).slice(0, 200);
 
   // Honeypot: real visitors never fill this hidden field.
-  if (str(body.company)) return dropSpam("honeypot", email);
+  if (str(body.company)) return dropSpam(request, "honeypot", "honeypot", email);
   // Time trap: the form reports how long it was open; scripts posting directly don't.
   const elapsed = Number(body.elapsed);
-  if (!Number.isFinite(elapsed) || elapsed < MIN_FILL_MS) return dropSpam("filled too fast", email);
+  if (!Number.isFinite(elapsed) || elapsed < MIN_FILL_MS) return dropSpam(request, "too fast", "filled too fast", email);
 
   const ip = request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
   if (rateLimited(ip)) {
@@ -42,8 +46,8 @@ export async function POST(request: Request) {
   if (message.length < 10 || message.length > 5000) return Response.json({ error: "Message should be 10–5000 characters." }, { status: 400 });
 
   const spam = contentSpamReasons(name, message);
-  if (spam.length) return dropSpam(spam.join(", "), email);
-  if (isDuplicate(email, message)) return dropSpam("duplicate", email);
+  if (spam.length) return dropSpam(request, "content", spam.join(", "), email);
+  if (isDuplicate(email, message)) return dropSpam(request, "duplicate", "duplicate", email);
 
   // A real person can trip these, so they get told what to fix.
   if (isDisposable(email)) return Response.json({ error: "Please use a permanent email address so I can reply." }, { status: 400 });

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
+import { track } from "@/lib/analytics";
 import { QA_LENS_STATE, TOGGLE_QA_LENS } from "@/lib/nav";
 
 const QaLens = dynamic(() => import("@/components/qa-lens").then((m) => m.QaLens), { ssr: false });
@@ -19,6 +20,7 @@ export function QaLensLoader() {
 
   const set = useCallback((on: boolean) => {
     setActive(on);
+    track("qa_lens_toggle", { state: on ? "on" : "off" });
     window.dispatchEvent(new CustomEvent(QA_LENS_STATE, { detail: on }));
     try {
       localStorage.setItem(STORAGE_KEY, on ? "on" : "off");
