@@ -1,53 +1,16 @@
-import { FlaskConical } from "lucide-react";
-import {
-  SiAngular, SiCypress, SiDjango, SiDocker, SiExpress, SiGithubactions, SiGraphql, SiJavascript,
-  SiJest, SiKubernetes, SiLinux, SiMongodb, SiMysql, SiNestjs, SiNextdotjs, SiNodedotjs,
-  SiPostgresql, SiPostman, SiPython, SiReact, SiReactquery, SiRedis, SiRedux, SiSocketdotio,
-  SiStripe, SiTailwindcss, SiTestinglibrary, SiTypescript, SiWebrtc,
-} from "react-icons/si";
-import { TbBrandAws, TbBrandAzure } from "react-icons/tb";
-
-const icons: Record<string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>> = {
-  Angular: SiAngular,
-  AWS: TbBrandAws,
-  Azure: TbBrandAzure,
-  Cypress: SiCypress,
-  "Django REST": SiDjango,
-  Docker: SiDocker,
-  Express: SiExpress,
-  "GitHub Actions": SiGithubactions,
-  GraphQL: SiGraphql,
-  JavaScript: SiJavascript,
-  Jest: SiJest,
-  Kubernetes: SiKubernetes,
-  Linux: SiLinux,
-  MongoDB: SiMongodb,
-  MySQL: SiMysql,
-  NestJS: SiNestjs,
-  "Next.js": SiNextdotjs,
-  "Node.js": SiNodedotjs,
-  Playwright: FlaskConical,
-  PostgreSQL: SiPostgresql,
-  Postman: SiPostman,
-  Python: SiPython,
-  React: SiReact,
-  "React Native": SiReact,
-  "React Testing Library": SiTestinglibrary,
-  "TanStack Query": SiReactquery,
-  Redis: SiRedis,
-  Redux: SiRedux,
-  "Socket.io": SiSocketdotio,
-  Stripe: SiStripe,
-  "Tailwind CSS": SiTailwindcss,
-  TypeScript: SiTypescript,
-  WebRTC: SiWebrtc,
-};
+import { techIconId, techIcons } from "@/lib/tech-icons";
 
 export function hasTechIcon(name: string) {
-  return name in icons;
+  return name in techIcons;
 }
 
+// Icons come from one cached sprite (public/tech-icons.svg, built by `npm run icons`) instead of
+// inline SVG paths, which made up most of the home page's HTML and its RSC payload.
 export function TechIcon({ name, className }: { name: string; className?: string }) {
-  const Icon = icons[name];
-  return Icon ? <Icon aria-hidden className={className} /> : null;
+  if (!hasTechIcon(name)) return null;
+  return (
+    <svg aria-hidden className={className}>
+      <use href={`/tech-icons.svg#${techIconId(name)}`} />
+    </svg>
+  );
 }

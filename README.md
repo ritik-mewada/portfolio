@@ -10,6 +10,8 @@ Built with Next.js 16, React 19, TypeScript, Tailwind CSS v4 and Motion.
 
 All content (bio, experience, skills, projects, links) lives in **`src/content/site.ts`**. The home page, project pages, résumé and sitemap update from it.
 
+Tech logos are mapped in `src/lib/tech-icons.ts`. After adding or changing one, run `npm run icons` to rebuild `public/tech-icons.svg`.
+
 ## Development
 
 ```bash
