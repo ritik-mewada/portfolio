@@ -63,8 +63,7 @@ export const experience: Experience[] = [
       "Manual testing of the devices, sensors and network used for safety monitoring in underground mines.",
     highlights: [
       "Write test cases and run manual tests on hardware devices and airflow sensors.",
-      "Test gas sensors from different manufacturers: set up their configuration, run factory calibration and record the readings in Excel.",
-      "Run weekly or bi-weekly bump tests, including on sensors kept in a chamber at fixed temperature and humidity, to see whether they stay reliable over months or start to fail.",
+      "Test gas sensors from different manufacturers: set up their configuration, run factory calibration, record the readings in Excel, and run weekly or bi-weekly tests to see whether they stay reliable over months or start to fail.",
       "Check that devices communicate correctly over Modbus, TCP/IP and MQTT.",
       "Use Wireshark to find the IP addresses of connected devices and to watch the traffic of a specific device.",
       "Log bugs in Jira with clear steps to reproduce, and follow them through to a fix.",

@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "icons": "node --experimental-strip-types --no-warnings scripts/build-tech-icons.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
