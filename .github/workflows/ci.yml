@@ -20,6 +20,15 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npx playwright test
+      - run: npx lhci autorun
+      - run: node scripts/lighthouse-summary.mjs
+        if: always()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/reports/
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

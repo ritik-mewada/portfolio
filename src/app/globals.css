@@ -2,6 +2,29 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * next/font sizes Inter's fallback only via local(Arial) ("Inter Fallback"). These add the same
+ * sizing for devices without Arial: Android (Roboto) and Linux (DejaVu Sans). Without them the
+ * text reflows when Inter loads, a layout shift of ~0.2 CLS on those devices.
+ * size-adjust = Inter avg width / fallback avg width; overrides = Inter metrics / size-adjust.
+ */
+@font-face {
+  font-family: "Inter Fallback Roboto";
+  src: local("Roboto"), local("Roboto-Regular");
+  size-adjust: 107.36%;
+  ascent-override: 90.24%;
+  descent-override: 22.47%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter Fallback DejaVu";
+  src: local("DejaVu Sans"), local("DejaVuSans");
+  size-adjust: 93.32%;
+  ascent-override: 103.81%;
+  descent-override: 25.85%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Liquid Glass Light (iOS-style) */
   --background: #f5f7fb;
@@ -58,7 +81,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-soft: var(--accent-soft);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans), "Inter Fallback Roboto", "Inter Fallback DejaVu";
   --font-mono: var(--font-geist-mono);
 
   --animate-marquee: marquee 40s linear infinite;
