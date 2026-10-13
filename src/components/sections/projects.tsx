@@ -73,7 +73,7 @@ export function Projects() {
 
       <Reveal className="mt-10 text-center">
         <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-          <SiGithub className="size-4" /> Everything else is on GitHub <ArrowUpRight className="size-3.5" />
+          <SiGithub aria-hidden className="size-4" /> Everything else is on GitHub <ArrowUpRight className="size-3.5" />
         </a>
       </Reveal>
     </section>
