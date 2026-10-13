@@ -37,14 +37,17 @@ function useTypewriter(words: readonly string[]) {
   return text;
 }
 
+// Real tests from tests/ (names as Playwright reports them), with timings from a local run.
 const testLines = [
-  { name: "hero › renders name and role", ms: 38 },
-  { name: "experience › lists current role first", ms: 24 },
-  { name: "projects › links resolve to GitHub", ms: 112 },
-  { name: "contact › validates email input", ms: 57 },
-  { name: "a11y › passes WCAG 2.1 AA checks", ms: 241 },
-  { name: "perf › LCP under 1.5s on 4G", ms: 189 },
+  { name: "hero › renders name and role", ms: 757 },
+  { name: "experience › lists current role first", ms: 739 },
+  { name: "projects › unknown project returns 404", ms: 1080 },
+  { name: "contact api › drops spam: SEO pitch", ms: 23 },
+  { name: "QA Lens › never duplicates page ids", ms: 1835 },
+  { name: "a11y › dark theme › / meets WCAG 2.1 AA", ms: 4699 },
 ];
+
+const duration = (ms: number) => (ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`);
 
 function TestRunnerCard() {
   const [shown, setShown] = useState(0);
@@ -62,7 +65,7 @@ function TestRunnerCard() {
       transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="relative hidden w-full max-w-md overflow-hidden rounded-2xl border glass font-mono text-[12.5px] shadow-2xl shadow-black/10 lg:block"
       role="figure"
-      aria-label="Example test run"
+      aria-label="Highlights from this site's own test suite"
     >
       <div className="flex items-center gap-1.5 border-b px-4 py-3">
         <span className="size-2.5 rounded-full bg-red-400/80" />
@@ -76,7 +79,7 @@ function TestRunnerCard() {
           <motion.p key={l.name} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className="flex gap-2">
             <span className="text-accent">✓</span>
             <span className="truncate">{l.name}</span>
-            <span className="ml-auto text-muted-foreground">{l.ms}ms</span>
+            <span className="ml-auto shrink-0 text-muted-foreground">{duration(l.ms)}</span>
           </motion.p>
         ))}
         {finished ? (
