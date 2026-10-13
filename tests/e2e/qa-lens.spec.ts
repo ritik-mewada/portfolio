@@ -47,7 +47,7 @@ test.describe("QA Lens", () => {
     await expect(button).toHaveAttribute("aria-pressed", "false");
   });
 
-  test("never duplicates ids from the page", async ({ page }) => {
+  test("never duplicates page ids", async ({ page }) => {
     await pointAt(page, 400, 400);
     await expect(page.locator(".qa-xray [data-qa]").first()).toBeAttached();
     expect(await page.locator(".qa-xray [id]").count()).toBe(0);

@@ -24,7 +24,7 @@ test.describe("projects", () => {
     });
   }
 
-  test("an unknown project shows the 404 page", async ({ page }) => {
+  test("unknown project returns 404", async ({ page }) => {
     const res = await page.goto("/projects/does-not-exist");
     expect(res?.status()).toBe(404);
     await expect(page.getByText("expected page, received 404")).toBeVisible();

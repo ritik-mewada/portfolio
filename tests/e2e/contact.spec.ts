@@ -55,7 +55,7 @@ test.describe("contact form › page", () => {
   });
 });
 
-test.describe("contact form › spam filter", () => {
+test.describe("contact api", () => {
   test.skip(({ isMobile }) => isMobile, "API tests don't depend on the device.");
 
   test("a real message passes every filter", async ({ request }) => {
@@ -74,7 +74,7 @@ test.describe("contact form › spam filter", () => {
     ["link in the name", { ...real, name: "http://spam.example" }],
   ];
   for (const [name, body] of silentlyDropped) {
-    test(`drops spam silently: ${name}`, async ({ request }) => {
+    test(`drops spam: ${name}`, async ({ request }) => {
       const res = await post(request, body);
       expect(res.status()).toBe(200);
       expect(await res.json()).toEqual({ ok: true });
@@ -88,7 +88,7 @@ test.describe("contact form › spam filter", () => {
     ["disposable address", { ...real, email: "tim@mailinator.com" }, /permanent email/],
   ];
   for (const [name, body, error] of shownErrors) {
-    test(`tells a person what to fix: ${name}`, async ({ request }) => {
+    test(`explains how to fix: ${name}`, async ({ request }) => {
       const res = await post(request, body);
       expect(res.status()).toBe(400);
       expect((await res.json()).error).toMatch(error);
