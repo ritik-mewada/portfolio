@@ -77,7 +77,7 @@ const jsonLd = {
     { "@type": "CollegeOrUniversity", name: "Gujarat Technological University" },
   ],
   sameAs: [site.socials.github, site.socials.linkedin],
-  knowsAbout: ["Software Quality Assurance", "Hardware Testing", "IoT", "Modbus", "MQTT", "TCP/IP", "React", "Next.js", "Node.js", "TypeScript"],
+  knowsAbout: ["Software Quality Assurance", "Manual Testing", "Hardware Testing", "IoT", "Wireshark", "Modbus", "MQTT", "TCP/IP", "React", "Next.js", "Node.js", "TypeScript"],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
