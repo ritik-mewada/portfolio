@@ -171,7 +171,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: "IoT & Protocols",
-    items: ["Hardware Testing", "Sensor Validation", "Network Testing", "Modbus", "TCP/IP", "MQTT"],
+    items: ["Hardware Testing", "Sensor Validation", "Network Testing", "Modbus", "TCP/IP", "MQTT", "Wireshark"],
   },
   {
     title: "Cloud & DevOps",
