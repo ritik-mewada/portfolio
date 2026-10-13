@@ -10,6 +10,7 @@ import { Navbar } from "@/components/navbar";
 import { PageNavigation } from "@/components/page-navigation";
 import { Providers } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { Umami } from "@/components/umami";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Providers>
         <Analytics />
         <SpeedInsights />
+        <Umami />
       </body>
     </html>
   );

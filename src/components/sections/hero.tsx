@@ -8,6 +8,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { toast } from "sonner";
 import { experience, site } from "@/content/site";
+import { track } from "@/lib/analytics";
 
 const current = experience.find((e) => e.current);
 
@@ -96,7 +97,10 @@ export function Hero() {
 
   const copyEmail = () =>
     navigator.clipboard.writeText(site.email).then(
-      () => toast.success("Email copied — talk soon!"),
+      () => {
+        toast.success("Email copied — talk soon!");
+        track("email_copied");
+      },
       () => toast.error(site.email),
     );
 
