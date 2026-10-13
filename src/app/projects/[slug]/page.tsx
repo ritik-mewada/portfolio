@@ -7,6 +7,7 @@ import { ProjectStatusBadge } from "@/components/project-status";
 import { Reveal } from "@/components/reveal";
 import { TechIcon } from "@/components/tech-icon";
 import { getProject, projects } from "@/content/site";
+import { ogImage } from "@/lib/og-image";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   return {
     title: project.title,
     description: project.description,
-    alternates: { canonical: `/projects/${slug}` },
-    openGraph: { title: `${project.title} — ${project.tagline}`, description: project.description },
+    alternates: { canonical: `/projects/${slug}/` },
+    openGraph: { title: `${project.title} — ${project.tagline}`, description: project.description, images: [ogImage] },
   };
 }
 

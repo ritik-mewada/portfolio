@@ -1,5 +1,3 @@
-import { cacheLife } from "next/cache";
-
 type GitHubSummary = {
   publicRepos: number;
   followers: number;
@@ -17,9 +15,7 @@ type Repo = {
 };
 
 export async function getGitHubSummary(username: string): Promise<GitHubSummary | null> {
-  "use cache";
-  cacheLife("hours");
-
+  // Runs at build time; the scheduled deploy rebuilds the site daily to refresh it.
   const headers: HeadersInit = { Accept: "application/vnd.github+json" };
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 

@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { projects } from "../../src/content/site";
 
-const pages = ["/", "/resume", `/projects/${projects[0].slug}`, "/this-page-does-not-exist"];
+const pages = ["/", "/resume/", `/projects/${projects[0].slug}/`, "/this-page-does-not-exist"];
 
 for (const theme of ["dark", "light"] as const) {
   test.describe(`a11y › ${theme} theme`, () => {

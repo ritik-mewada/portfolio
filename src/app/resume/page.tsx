@@ -6,7 +6,7 @@ import "./resume.css";
 export const metadata: Metadata = {
   title: "Resume",
   description: `Resume of ${site.name} — ${site.role}.`,
-  alternates: { canonical: "/resume" },
+  alternates: { canonical: "/resume/" },
 };
 
 const stripProtocol = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");

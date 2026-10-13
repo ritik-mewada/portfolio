@@ -15,7 +15,7 @@ test.describe("hero", () => {
     await page.goto("/");
     const hero = page.locator("#top");
     await expect(hero.getByRole("link", { name: /View my work/ })).toHaveAttribute("href", "#projects");
-    await expect(hero.getByRole("link", { name: "Resume" })).toHaveAttribute("href", "/resume");
+    await expect(hero.getByRole("link", { name: "Resume" })).toHaveAttribute("href", "/resume/");
     for (const [name, href] of [["GitHub", site.socials.github], ["LinkedIn", site.socials.linkedin]]) {
       const link = hero.getByRole("link", { name });
       await expect(link).toHaveAttribute("href", href);
@@ -62,7 +62,7 @@ test.describe("navigation", () => {
     await toggle.click();
     await expect(page.getByRole("button", { name: "Close menu" })).toHaveAttribute("aria-expanded", "true");
     await page.getByRole("link", { name: "Resume" }).last().click();
-    await expect(page).toHaveURL(/\/resume$/);
+    await expect(page).toHaveURL(/\/resume\/$/);
   });
 
   test("skip link jumps to the main content", async ({ page, isMobile }) => {

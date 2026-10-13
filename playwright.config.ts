@@ -3,7 +3,7 @@ import { defineConfig, devices } from "@playwright/test";
 const PORT = 3200;
 const CI = !!process.env.CI;
 
-// End-to-end tests run against a production build (`npm run build` first, or `npm test`).
+// End-to-end tests run against the static export, served like GitHub Pages serves it (`npm run build` first).
 export default defineConfig({
   testDir: "tests",
   fullyParallel: true,
@@ -22,11 +22,9 @@ export default defineConfig({
     { name: "mobile", testDir: "tests/e2e", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: `npx next start -p ${PORT}`,
+    command: `node scripts/serve-static.mjs out ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !CI,
     timeout: 120_000,
-    // Never send real email or analytics from tests, even if .env.local has keys.
-    env: { RESEND_API_KEY: "", NEXT_PUBLIC_UMAMI_WEBSITE_ID: "" },
   },
 });

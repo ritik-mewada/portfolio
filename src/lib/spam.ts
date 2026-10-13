@@ -1,8 +1,7 @@
-import { resolveMx, resolve4 } from "node:dns/promises";
-
-// Spam filtering for the contact form. Obvious bot traffic is dropped silently
-// (the bot is told it worked, so it learns nothing); anything a real person
-// could trip gets a visible error instead, so no genuine message is lost quietly.
+// Spam filtering for the contact form, run in the browser before anything is sent.
+// Obvious bot traffic is dropped silently (the bot is told it worked, so it learns
+// nothing); anything a real person could trip gets a visible error instead, so no
+// genuine message is lost quietly. Web3Forms adds its own server-side filtering.
 
 /** Submissions faster than this were not typed by a person. */
 export const MIN_FILL_MS = 3000;
@@ -55,47 +54,8 @@ export function isDisposable(email: string) {
   return DISPOSABLE_DOMAINS.has(email.split("@")[1].toLowerCase());
 }
 
-/** False only when DNS clearly says the domain can't receive mail; lookup trouble counts as fine. */
-export async function domainAcceptsMail(email: string) {
-  const domain = email.split("@")[1].toLowerCase();
-  const missing = (e: unknown) => ["ENOTFOUND", "ENODATA"].includes((e as { code?: string }).code ?? "");
-  const receives = async (d: string) => {
-    try {
-      if ((await resolveMx(d)).length) return true;
-    } catch (e) {
-      if (!missing(e)) return true;
-    }
-    // No MX records: mail falls back to the domain's address record.
-    try {
-      return (await resolve4(d)).length > 0;
-    } catch (e) {
-      return !missing(e);
-    }
-  };
-  // If a domain known to work fails too, DNS itself is down: don't turn real visitors away.
-  const lookup = async () => (await receives(domain)) || !(await receives("gmail.com"));
-  const timeout = new Promise<boolean>((r) => setTimeout(() => r(true), 2500));
-  return Promise.race([lookup(), timeout]);
-}
-
-// Per-IP limits and duplicate detection. Kept in memory, so each server instance
-// counts on its own; that is enough to stop a bot hammering the form.
-const LIMITS = [
-  { windowMs: 10 * 60_000, max: 3 },
-  { windowMs: 24 * 60 * 60_000, max: 10 },
-];
-const hits = new Map<string, number[]>();
+// Duplicate detection, kept in memory for the open tab: stops double submits.
 const recent = new Map<string, number>();
-
-export function rateLimited(ip: string, now = Date.now()) {
-  const day = LIMITS[LIMITS.length - 1].windowMs;
-  const list = (hits.get(ip) ?? []).filter((t) => now - t < day);
-  const limited = LIMITS.some(({ windowMs, max }) => list.filter((t) => now - t < windowMs).length >= max);
-  if (!limited) list.push(now);
-  hits.set(ip, list);
-  if (hits.size > 5000) hits.delete(hits.keys().next().value!);
-  return limited;
-}
 
 const messageKey = (email: string, message: string) => `${email.toLowerCase()}\n${message.replace(/\s+/g, " ").toLowerCase()}`;
 

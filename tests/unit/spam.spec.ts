@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { contentSpamReasons, isDisposable, isDuplicate, rateLimited, rememberSent } from "../../src/lib/spam";
+import { contentSpamReasons, isDisposable, isDuplicate, rememberSent } from "../../src/lib/spam";
 
 test.describe("spam filter › message content", () => {
   test("lets a normal message through", () => {
@@ -33,30 +33,6 @@ test.describe("spam filter › email addresses", () => {
   test("recognises disposable domains, case-insensitively", () => {
     expect(isDisposable("tim@Mailinator.com")).toBe(true);
     expect(isDisposable("tim@gmail.com")).toBe(false);
-  });
-});
-
-test.describe("spam filter › rate limit", () => {
-  test("allows 3 messages per 10 minutes per IP, then blocks", () => {
-    const ip = `unit-${Math.random()}`;
-    const t = 1_000_000;
-    expect([rateLimited(ip, t), rateLimited(ip, t + 1), rateLimited(ip, t + 2)]).toEqual([false, false, false]);
-    expect(rateLimited(ip, t + 3)).toBe(true);
-    expect(rateLimited(`${ip}-other`, t + 3)).toBe(false);
-  });
-
-  test("allows more once the 10-minute window has passed", () => {
-    const ip = `unit-${Math.random()}`;
-    const t = 2_000_000;
-    for (let i = 0; i < 3; i++) rateLimited(ip, t + i);
-    expect(rateLimited(ip, t + 11 * 60_000)).toBe(false);
-  });
-
-  test("caps a day at 10 messages", () => {
-    const ip = `unit-${Math.random()}`;
-    let t = 3_000_000;
-    for (let i = 0; i < 10; i++, t += 11 * 60_000) expect(rateLimited(ip, t)).toBe(false);
-    expect(rateLimited(ip, t)).toBe(true);
   });
 });
 

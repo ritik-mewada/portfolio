@@ -42,7 +42,7 @@ const testLines = [
   { name: "hero › renders name and role", ms: 757 },
   { name: "experience › lists current role first", ms: 739 },
   { name: "projects › unknown project returns 404", ms: 1080 },
-  { name: "contact api › drops spam: SEO pitch", ms: 23 },
+  { name: "contact form › drops spam silently: SEO pitch", ms: 23 },
   { name: "QA Lens › never duplicates page ids", ms: 1835 },
   { name: "a11y › dark theme › / meets WCAG 2.1 AA", ms: 4699 },
 ];
