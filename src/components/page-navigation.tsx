@@ -38,7 +38,6 @@ export function PageNavigation() {
   const lenis = useLenis();
   const [sections, setSections] = useState<(typeof SECTIONS)[number][]>([]);
   const [current, setCurrent] = useState(0);
-  const [hint, setHint] = useState(false);
 
   const isHome = pathname === "/";
 
@@ -150,23 +149,6 @@ export function PageNavigation() {
     };
   }, [isHome, lenis]);
 
-  // One-time tip (per browser session, mouse users only).
-  useEffect(() => {
-    if (!sections.length || !window.matchMedia("(pointer: fine)").matches) return;
-    try {
-      if (sessionStorage.getItem("nav-hint") === "1") return;
-      sessionStorage.setItem("nav-hint", "1");
-    } catch {
-      return;
-    }
-    const show = setTimeout(() => setHint(true), 1800);
-    const hide = setTimeout(() => setHint(false), 8000);
-    return () => {
-      clearTimeout(show);
-      clearTimeout(hide);
-    };
-  }, [sections]);
-
   if (!isHome || !sections.length) return null;
 
   return (
@@ -201,27 +183,6 @@ export function PageNavigation() {
           </a>
         ))}
       </nav>
-
-      <div
-        role="status"
-        data-page-nav
-        onClick={() => setHint(false)}
-        className={cn(
-          "glass no-print fixed bottom-5 left-1/2 z-[70] hidden max-w-[calc(100vw-2rem)] -translate-x-1/2 truncate rounded-full !bg-background/90 px-4 py-2.5 text-[13px] transition-all duration-300 md:block",
-          hint ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
-        )}
-      >
-        {hint && (
-          <>
-            <b className="mr-1.5 text-accent">Tip</b>Drag anywhere to scroll · <Kbd>J</Kbd> <Kbd>K</Kbd> next / previous section ·{" "}
-            <Kbd>1</Kbd>–<Kbd>{String(sections.length)}</Kbd> jump · <Kbd>⌘L</Kbd> QA Lens
-          </>
-        )}
-      </div>
     </>
   );
-}
-
-function Kbd({ children }: { children: string }) {
-  return <kbd className="rounded border border-current px-1 font-mono text-[10.5px] opacity-75">{children}</kbd>;
 }
