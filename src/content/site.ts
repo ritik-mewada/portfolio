@@ -62,12 +62,14 @@ export const experience: Experience[] = [
     summary:
       "Manual testing of the devices, sensors and network used for safety monitoring in underground mines.",
     highlights: [
-      "Write test cases and run manual tests on hardware devices, including gas and airflow sensors.",
+      "Write test cases and run manual tests on hardware devices and airflow sensors.",
+      "Test gas sensors from different manufacturers: set up their configuration, run factory calibration and record the readings in Excel.",
+      "Run weekly or bi-weekly bump tests, including on sensors kept in a chamber at fixed temperature and humidity, to see whether they stay reliable over months or start to fail.",
       "Check that devices communicate correctly over Modbus, TCP/IP and MQTT.",
       "Use Wireshark to find the IP addresses of connected devices and to watch the traffic of a specific device.",
       "Log bugs in Jira with clear steps to reproduce, and follow them through to a fix.",
     ],
-    stack: ["Manual Testing", "Test Cases", "Gas & Airflow Sensors", "Modbus", "TCP/IP", "MQTT", "Wireshark", "Jira"],
+    stack: ["Manual Testing", "Test Cases", "Gas & Airflow Sensors", "Calibration", "Bump Testing", "Modbus", "TCP/IP", "MQTT", "Wireshark", "Jira"],
   },
   {
     company: "HRX Connect",
