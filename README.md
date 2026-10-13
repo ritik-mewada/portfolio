@@ -1,5 +1,7 @@
 # Ritik Mewada — Portfolio
 
+[![CI](https://github.com/ritik-mewada/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/ritik-mewada/portfolio/actions/workflows/ci.yml)
+
 Personal portfolio of Ritik Mewada, Quality Assurance Engineer. Live at **[ritik-mewada.vercel.app](https://ritik-mewada.vercel.app)**.
 
 Built with **Next.js 16 (App Router, Cache Components)**, **React 19**, **TypeScript**, **Tailwind CSS v4** and **Motion**.
@@ -14,10 +16,11 @@ Built with **Next.js 16 (App Router, Cache Components)**, **React 19**, **TypeSc
 - **Project case-study pages** (`/projects/[slug]`), statically generated.
 - **Printable resume page** (`/resume`) that always matches the site content.
 - **Live GitHub activity** (repos, languages, recent work), cached and refreshed hourly.
-- **Contact form** with validation and a spam honeypot. It sends email through Resend when `RESEND_API_KEY` is set and falls back to opening the visitor's email app.
+- **Contact form** with validation and automatic spam filtering (honeypot, time trap, content checks, rate limits). It sends email through Resend when `RESEND_API_KEY` is set and falls back to opening the visitor's email app.
 - **SEO:** metadata, JSON-LD `Person` schema, sitemap, robots, generated Open Graph image and favicon, web manifest.
 - **Accessibility:** skip link, keyboard navigation, `prefers-reduced-motion` respected, WCAG AA contrast in both themes.
-- Vercel Analytics and Speed Insights, plus GitHub Actions CI (lint, typecheck, build).
+- Vercel Analytics and Speed Insights, plus Umami for custom events (section views, project and résumé opens, contact form results).
+- GitHub Actions CI: lint, typecheck, build and the Playwright test suite on every push and pull request.
 
 ## Editing content
 
@@ -36,6 +39,25 @@ npm run dev        # http://localhost:3000
 npm run lint
 npm run build
 ```
+
+## Tests
+
+The Playwright suite in **`tests/`** runs against a production build, on desktop Chrome and a Pixel 7 phone:
+
+- **`tests/unit/`**: the contact form's spam filter (link stuffing, SEO pitches, rate limits, duplicates).
+- **`tests/e2e/home.spec.ts`**: hero, experience order, navbar and phone menu, skip link.
+- **`tests/e2e/pages.spec.ts`**: every project page, a real 404 for unknown projects, the résumé on screen and in print.
+- **`tests/e2e/contact.spec.ts`**: the form in the browser, and the API's spam filter end to end.
+- **`tests/e2e/qa-lens.spec.ts`**: the QA Lens follows the pointer, toggles with Ctrl+L / Esc, and never duplicates ids.
+- **`tests/e2e/a11y.spec.ts`**: axe WCAG 2.1 AA checks on every page type, in dark and light themes.
+
+```bash
+npx playwright install chromium   # once
+npm run build
+npm test                          # or: npm run test:ui
+```
+
+Tests never send real email or analytics: the test server runs with `RESEND_API_KEY` and the Umami ID blanked.
 
 Copy `.env.example` to `.env.local` and fill in values as needed (all optional). Never commit `.env.local`; it is already in `.gitignore`.
 
