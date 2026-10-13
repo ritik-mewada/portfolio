@@ -179,10 +179,10 @@ export function Hero() {
               <MapPin className="size-4 text-accent" /> {site.location}
             </span>
             <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm transition-colors hover:text-foreground">
-              <SiGithub className="size-4" /> GitHub <ArrowUpRight className="size-3" />
+              <SiGithub aria-hidden className="size-4" /> GitHub <ArrowUpRight className="size-3" />
             </a>
             <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm transition-colors hover:text-foreground">
-              <FaLinkedinIn className="size-4" /> LinkedIn <ArrowUpRight className="size-3" />
+              <FaLinkedinIn aria-hidden className="size-4" /> LinkedIn <ArrowUpRight className="size-3" />
             </a>
           </div>
         </div>

@@ -14,10 +14,10 @@ export function Footer() {
             Press <kbd className="rounded border px-1.5 py-0.5">⌘K</kbd> to explore
           </span>
           <a href={site.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-foreground">
-            <SiGithub className="size-4" />
+            <SiGithub aria-hidden className="size-4" />
           </a>
           <a href={site.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-foreground">
-            <FaLinkedinIn className="size-4" />
+            <FaLinkedinIn aria-hidden className="size-4" />
           </a>
         </div>
       </div>

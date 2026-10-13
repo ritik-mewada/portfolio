@@ -58,7 +58,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         )}
         {project.repos.map((r) => (
           <a key={r.url} href={r.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full glass px-5 py-2.5 text-sm transition-colors hover:bg-muted">
-            <SiGithub className="size-4" /> {r.label}
+            <SiGithub aria-hidden className="size-4" /> {r.label}
           </a>
         ))}
       </Reveal>
