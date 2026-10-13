@@ -8,7 +8,7 @@
         "http://localhost:3300/resume",
         "http://localhost:3300/projects/playwright-suite"
       ],
-      "numberOfRuns": 3,
+      "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--no-sandbox",
         "throttlingMethod": "devtools"
