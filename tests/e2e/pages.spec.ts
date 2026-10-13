@@ -6,12 +6,12 @@ test.describe("projects", () => {
     await page.goto("/");
     const cards = page.locator('#projects a[href^="/projects/"]');
     const hrefs = new Set(await cards.evaluateAll((as) => as.map((a) => a.getAttribute("href"))));
-    expect([...hrefs].sort()).toEqual(projects.map((p) => `/projects/${p.slug}`).sort());
+    expect([...hrefs].sort()).toEqual(projects.map((p) => `/projects/${p.slug}/`).sort());
   });
 
   for (const project of projects) {
     test(`${project.slug} › page renders with working links`, async ({ page }) => {
-      const res = await page.goto(`/projects/${project.slug}`);
+      const res = await page.goto(`/projects/${project.slug}/`);
       expect(res?.status()).toBe(200);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(project.title);
       await expect(page.getByText(project.tagline, { exact: true })).toBeVisible();
@@ -35,7 +35,7 @@ test.describe("projects", () => {
 
 test.describe("résumé", () => {
   test("shows contact details and every job", async ({ page }) => {
-    await page.goto("/resume");
+    await page.goto("/resume/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(site.name);
     await expect(page.getByRole("button", { name: "Save as PDF" })).toBeVisible();
     await expect(page.locator(`a[href="mailto:${site.email}"]`).first()).toBeVisible();
@@ -43,7 +43,7 @@ test.describe("résumé", () => {
   });
 
   test("prints as a one-column sheet without site chrome", async ({ page }) => {
-    await page.goto("/resume");
+    await page.goto("/resume/");
     await page.emulateMedia({ media: "print" });
     await expect(page.locator(".cv-sheet")).toBeVisible();
     await expect(page.getByRole("button", { name: "Save as PDF" })).toBeHidden();

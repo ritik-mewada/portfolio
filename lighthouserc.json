@@ -1,12 +1,12 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npx next start -p 3300",
-      "startServerReadyPattern": "Ready",
+      "startServerCommand": "node scripts/serve-static.mjs out 3300",
+      "startServerReadyPattern": "Serving",
       "url": [
         "http://localhost:3300/",
-        "http://localhost:3300/resume",
-        "http://localhost:3300/projects/playwright-suite"
+        "http://localhost:3300/resume/",
+        "http://localhost:3300/projects/playwright-suite/"
       ],
       "numberOfRuns": 1,
       "settings": {

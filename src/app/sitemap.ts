@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
 import { projects, site } from "@/content/site";
 
+// Rendered once at build time: the site is exported as static files.
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: site.url, changeFrequency: "monthly", priority: 1 },
-    { url: `${site.url}/resume`, changeFrequency: "monthly", priority: 0.8 },
-    ...projects.map((p) => ({ url: `${site.url}/projects/${p.slug}`, changeFrequency: "yearly" as const, priority: 0.6 })),
+    { url: `${site.url}/`, changeFrequency: "monthly", priority: 1 },
+    { url: `${site.url}/resume/`, changeFrequency: "monthly", priority: 0.8 },
+    ...projects.map((p) => ({ url: `${site.url}/projects/${p.slug}/`, changeFrequency: "yearly" as const, priority: 0.6 })),
   ];
 }

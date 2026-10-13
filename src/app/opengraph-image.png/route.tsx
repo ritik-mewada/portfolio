@@ -3,9 +3,10 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { experience, site } from "@/content/site";
 
-export const alt = `${site.name} — ${site.role}`;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+// Rendered to a .png file at build time, so GitHub Pages serves it with the right content type.
+export const dynamic = "force-static";
+
+const size = { width: 1200, height: 630 };
 
 const font = (file: string) => readFile(join(process.cwd(), "assets", file));
 const [geistRegular, geistBold, geistMonoBold] = await Promise.all([font("Geist-Regular.woff"), font("Geist-Bold.woff"), font("GeistMono-Bold.woff")]);
@@ -13,14 +14,14 @@ const [geistRegular, geistBold, geistMonoBold] = await Promise.all([font("Geist-
 // Real tests from tests/, as in the hero's test-runner card.
 const tests = [
   ["hero › renders name and role", "757ms"],
-  ["contact api › drops spam", "23ms"],
+  ["contact form › drops spam", "23ms"],
   ["projects › unknown page is 404", "1.1s"],
   ["a11y › meets WCAG 2.1 AA", "4.7s"],
 ];
 
 const mono = { fontFamily: "Geist Mono", fontWeight: 700 } as const;
 
-export default function OpengraphImage() {
+export function GET() {
   const current = experience.find((e) => e.current);
   return new ImageResponse(
     (

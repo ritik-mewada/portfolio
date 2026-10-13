@@ -24,7 +24,7 @@ export async function GitHubActivity() {
 
   return (
     <section id="github" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
-      <SectionHeading index="05" eyebrow="Open source" title="Recently on GitHub" description="Pulled live from the GitHub API and refreshed every few hours." />
+      <SectionHeading index="05" eyebrow="Open source" title="Recently on GitHub" description="Pulled from the GitHub API and refreshed daily." />
 
       <div className="grid gap-4 lg:grid-cols-[1fr_1.6fr]">
         <Reveal>

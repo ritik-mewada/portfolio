@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Placeholder so the contact form's delivery tests run; requests to Web3Forms are mocked.
+      NEXT_PUBLIC_WEB3FORMS_KEY: test-key
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -2,13 +2,15 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const size = { width: 64, height: 64 };
-export const contentType = "image/png";
+// Rendered to a .png file at build time, so GitHub Pages serves it with the right content type.
+export const dynamic = "force-static";
+
+const size = { width: 64, height: 64 };
 
 const geistMonoBold = await readFile(join(process.cwd(), "assets/GeistMono-Bold.woff"));
 
 // Matches the navbar's terminal-prompt mark: "$ rm" with a cursor block.
-export default function Icon() {
+export function GET() {
   return new ImageResponse(
     (
       <div

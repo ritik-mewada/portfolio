@@ -1,3 +1,4 @@
+import { basePath } from "@/lib/base-path";
 import { techIconId, techIcons } from "@/lib/tech-icons";
 
 export function hasTechIcon(name: string) {
@@ -10,7 +11,7 @@ export function TechIcon({ name, className }: { name: string; className?: string
   if (!hasTechIcon(name)) return null;
   return (
     <svg aria-hidden className={className}>
-      <use href={`/tech-icons.svg#${techIconId(name)}`} />
+      <use href={`${basePath}/tech-icons.svg#${techIconId(name)}`} />
     </svg>
   );
 }

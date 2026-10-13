@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CommandMenuLoader } from "@/components/command-menu-loader";
 import { QaLensLoader } from "@/components/qa-lens-loader";
 import { Footer } from "@/components/footer";
@@ -12,6 +10,8 @@ import { Providers, ThemeProvider } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Umami } from "@/components/umami";
 import { site } from "@/content/site";
+import { basePath } from "@/lib/base-path";
+import { ogImage } from "@/lib/og-image";
 import "./globals.css";
 
 // Inter is the closest open font to Apple's SF Pro.
@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     "Ontario",
   ],
   alternates: { canonical: "/" },
+  icons: { icon: { url: `${basePath}/icon.png`, type: "image/png", sizes: "64x64" } },
   openGraph: {
     type: "profile",
     url: "/",
@@ -51,8 +52,9 @@ export const metadata: Metadata = {
     description: site.summary,
     firstName: "Ritik",
     lastName: "Mewada",
+    images: [ogImage],
   },
-  twitter: { card: "summary_large_image", title: `${site.name} — ${site.role}`, description: site.summary },
+  twitter: { card: "summary_large_image", title: `${site.name} — ${site.role}`, description: site.summary, images: [ogImage] },
   robots: { index: true, follow: true },
   // Google Search Console ownership check.
   verification: { google: "PbD3YCY30p2-_Wy1ocgSUy_DMhxg8iTX4OVm-Rddyzs" },
@@ -115,8 +117,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <QaLensLoader />
           <PageNavigation />
         </Providers>
-        <Analytics />
-        <SpeedInsights />
         <Umami />
       </body>
     </html>

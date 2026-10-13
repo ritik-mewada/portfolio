@@ -4,15 +4,17 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { flushQueuedEvents, track } from "@/lib/analytics";
+import { basePath } from "@/lib/base-path";
 
 const WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
 // Recognises the links worth counting by where they point, so individual links don't need tagging.
 function linkEvent(a: HTMLAnchorElement): [string, Record<string, string>] | null {
-  const href = a.getAttribute("href") ?? "";
+  const raw = a.getAttribute("href") ?? "";
+  const href = basePath && raw.startsWith(`${basePath}/`) ? raw.slice(basePath.length) : raw;
   const from = a.closest("section[id]")?.id ?? (a.closest("header") ? "nav" : a.closest("footer") ? "footer" : "page");
   if (href.startsWith("mailto:")) return ["email_click", { from }];
-  if (href === "/resume" || href.startsWith("/resume#") || href.startsWith("/resume?")) return ["resume_open", { from }];
+  if (/^\/resume\/?(?:[#?]|$)/.test(href)) return ["resume_open", { from }];
   const project = href.match(/^\/projects\/([^/?#]+)/);
   if (project) return ["project_open", { project: project[1] }];
   if (/^https?:\/\//.test(href)) {

@@ -22,7 +22,7 @@ export const site = {
   ],
   location: "Ontario, Canada",
   email: "ritikmewada@gmail.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ritik-mewada.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ritik-mewada.github.io",
   availability: "Open to interesting conversations",
   socials: {
     github: "https://github.com/ritik-mewada",

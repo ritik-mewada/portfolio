@@ -1,112 +1,88 @@
-import { resolveMx } from "node:dns/promises";
-import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-// Each API test posts from its own made-up IP so the per-IP rate limit doesn't leak between tests.
-let ipCount = 0;
-const post = (request: APIRequestContext, body: Record<string, unknown>, ip = `10.0.${process.pid % 250}.${++ipCount}`) =>
-  request.post("/api/contact", { data: body, headers: { "x-real-ip": ip } });
+const WEB3FORMS = "https://api.web3forms.com/submit";
+// Delivery tests need a Web3Forms key built into the site; CI builds with a placeholder one.
+const hasKey = !!process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
-const real = { name: "Jane Recruiter", email: "jane@gmail.com", message: "Hi Ritik, we have a QA role open at Acme. Interested?", elapsed: 9000 };
+const real = { name: "Jane Recruiter", email: "jane@gmail.com", message: "Hi Ritik, we have a QA role open at Acme. Interested?" };
 
-test.describe("contact form › page", () => {
-  // Scoped to the real form: the QA Lens keeps an inert copy of the page for its x-ray view.
-  const form = (page: Page) => page.locator("main form");
+// Scoped to the real form: the QA Lens keeps an inert copy of the page for its x-ray view.
+const form = (page: Page) => page.locator("main form");
+
+async function fill(page: Page, fields: Partial<typeof real> = {}) {
+  const { name, email, message } = { ...real, ...fields };
+  await form(page).getByLabel("Name").fill(name);
+  await form(page).getByLabel("Email").fill(email);
+  await form(page).getByLabel("Message").fill(message);
+}
+
+const submit = (page: Page) => form(page).getByRole("button", { name: "Send message" }).click();
+
+test.describe("contact form", () => {
+  let requests: Record<string, unknown>[];
 
   test.beforeEach(async ({ page }) => {
+    requests = [];
+    await page.route(WEB3FORMS, (route) => {
+      requests.push(route.request().postDataJSON());
+      return route.fulfill({ json: { success: true } });
+    });
+    await page.clock.install();
     await page.goto("/#contact");
   });
 
+  // Skips the time trap: a person takes longer than 3 seconds to write a message.
+  const typeLikeAPerson = (page: Page) => page.clock.fastForward(10_000);
+
   test("won't submit with empty fields", async ({ page }) => {
-    let posted = false;
-    await page.route("**/api/contact", (route) => {
-      posted = true;
-      return route.fulfill({ json: { ok: true } });
-    });
-    await form(page).getByRole("button", { name: "Send message" }).click();
+    await submit(page);
     await expect(form(page).getByLabel("Name")).toBeFocused();
-    expect(posted).toBe(false);
+    expect(requests).toHaveLength(0);
   });
 
-  test("sends the message with timing and page, then clears the form", async ({ page }) => {
-    const requests: Record<string, unknown>[] = [];
-    await page.route("**/api/contact", (route) => {
-      requests.push(route.request().postDataJSON());
-      return route.fulfill({ json: { ok: true } });
-    });
-    await form(page).getByLabel("Name").fill(real.name);
-    await form(page).getByLabel("Email").fill(real.email);
-    await form(page).getByLabel("Message").fill(real.message);
-    await form(page).getByRole("button", { name: "Send message" }).click();
+  test("sends the message with its page, then clears the form", async ({ page }) => {
+    test.skip(!hasKey, "Built without NEXT_PUBLIC_WEB3FORMS_KEY.");
+    await fill(page);
+    await typeLikeAPerson(page);
+    await submit(page);
 
     await expect(page.getByText("Message sent")).toBeVisible();
     await expect(form(page).getByLabel("Name")).toHaveValue("");
     expect(requests).toHaveLength(1);
-    expect(requests[0]).toMatchObject({ name: real.name, email: real.email, message: real.message, company: "", page: "/" });
-    expect(typeof requests[0].elapsed).toBe("number");
+    expect(requests[0]).toMatchObject({ ...real, access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, page: "/" });
   });
 
-  test("shows the server's error message", async ({ page }) => {
-    await page.route("**/api/contact", (route) => route.fulfill({ status: 400, json: { error: "Please use a permanent email address so I can reply." } }));
-    await form(page).getByLabel("Name").fill(real.name);
-    await form(page).getByLabel("Email").fill("tim@mailinator.com");
-    await form(page).getByLabel("Message").fill(real.message);
-    await form(page).getByRole("button", { name: "Send message" }).click();
+  test("says so when the network fails", async ({ page }) => {
+    test.skip(!hasKey, "Built without NEXT_PUBLIC_WEB3FORMS_KEY.");
+    await page.route(WEB3FORMS, (route) => route.abort());
+    await fill(page);
+    await typeLikeAPerson(page);
+    await submit(page);
+    await expect(page.getByText("Network error")).toBeVisible();
+  });
+
+  test("asks for a permanent address instead of a disposable one", async ({ page }) => {
+    await fill(page, { email: "tim@mailinator.com" });
+    await typeLikeAPerson(page);
+    await submit(page);
     await expect(page.getByText("Please use a permanent email address")).toBeVisible();
-  });
-});
-
-test.describe("contact api", () => {
-  test.skip(({ isMobile }) => isMobile, "API tests don't depend on the device.");
-
-  test("a real message passes every filter", async ({ request }) => {
-    // Tests run without a Resend key, so a message that clears the filters gets the "not configured" fallback.
-    const res = await post(request, real);
-    expect(res.status()).toBe(503);
-    expect(await res.json()).toMatchObject({ fallback: true });
+    expect(requests).toHaveLength(0);
   });
 
-  const silentlyDropped: [string, Record<string, unknown>][] = [
-    ["honeypot filled", { ...real, company: "Acme SEO" }],
-    ["posted without the form", { name: real.name, email: real.email, message: real.message }],
-    ["filled in under 3 seconds", { ...real, elapsed: 800 }],
-    ["SEO pitch", { ...real, message: "We can get your website on the first page of Google with SEO and backlinks. Click here." }],
-    ["link stuffing", { ...real, message: "see http://a.com http://b.com http://c.com http://d.com" }],
-    ["link in the name", { ...real, name: "http://spam.example" }],
+  const spam: [string, (page: Page) => Promise<void>][] = [
+    ["honeypot filled", (page) => form(page).locator('input[name="company"]').evaluate((el: HTMLInputElement) => (el.value = "Acme SEO")).then(() => typeLikeAPerson(page))],
+    ["filled in under 3 seconds", async () => {}],
+    ["SEO pitch", (page) => fill(page, { message: "We can get your website on the first page of Google with SEO and backlinks. Click here." }).then(() => typeLikeAPerson(page))],
+    ["link in the name", (page) => fill(page, { name: "http://spam.example" }).then(() => typeLikeAPerson(page))],
   ];
-  for (const [name, body] of silentlyDropped) {
-    test(`drops spam: ${name}`, async ({ request }) => {
-      const res = await post(request, body);
-      expect(res.status()).toBe(200);
-      expect(await res.json()).toEqual({ ok: true });
+  for (const [name, setup] of spam) {
+    test(`drops spam silently: ${name}`, async ({ page }) => {
+      await fill(page);
+      await setup(page);
+      await submit(page);
+      // The bot sees the usual success message, but nothing is sent.
+      await expect(page.getByText("Message sent")).toBeVisible();
+      expect(requests).toHaveLength(0);
     });
   }
-
-  const shownErrors: [string, Record<string, unknown>, RegExp][] = [
-    ["missing name", { ...real, name: "" }, /name/],
-    ["invalid email", { ...real, email: "not-an-email" }, /valid email/],
-    ["message too short", { ...real, message: "hi" }, /10–5000/],
-    ["disposable address", { ...real, email: "tim@mailinator.com" }, /permanent email/],
-  ];
-  for (const [name, body, error] of shownErrors) {
-    test(`explains how to fix: ${name}`, async ({ request }) => {
-      const res = await post(request, body);
-      expect(res.status()).toBe(400);
-      expect((await res.json()).error).toMatch(error);
-    });
-  }
-
-  test("rejects a domain that can't receive mail", async ({ request }) => {
-    const dns = await resolveMx("gmail.com").then(() => true, () => false);
-    test.skip(!dns, "No DNS here, so the server skips this check by design.");
-    const res = await post(request, { ...real, email: "jane@domain-that-does-not-exist.invalid" });
-    expect(res.status()).toBe(400);
-    expect((await res.json()).error).toMatch(/can't receive mail/);
-  });
-
-  test("rate-limits a 4th message within 10 minutes", async ({ request }) => {
-    const ip = `10.9.${process.pid % 250}.1`;
-    for (let i = 1; i <= 3; i++) expect((await post(request, { ...real, message: `${real.message} (${i})` }, ip)).status()).not.toBe(429);
-    const res = await post(request, real, ip);
-    expect(res.status()).toBe(429);
-  });
 });
