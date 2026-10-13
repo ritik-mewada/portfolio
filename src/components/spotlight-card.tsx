@@ -12,6 +12,7 @@ export function SpotlightCard({ children, className }: { children: React.ReactNo
 
   return (
     <motion.div
+      data-qa-pointer-fx
       onPointerMove={(e) => {
         if (e.pointerType !== "mouse") return;
         const r = e.currentTarget.getBoundingClientRect();
