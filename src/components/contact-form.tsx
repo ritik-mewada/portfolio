@@ -4,6 +4,7 @@ import { Loader2, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { site } from "@/content/site";
+import { track } from "@/lib/analytics";
 
 const inputClass =
   "w-full rounded-xl border bg-background px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-accent";
@@ -30,6 +31,7 @@ export function ContactForm() {
       const json = (await res.json().catch(() => ({}))) as { error?: string; fallback?: boolean };
       if (res.ok) {
         toast.success("Message sent — I'll get back to you soon.");
+        track("contact_sent");
         form.reset();
         openedAt.current = Date.now();
       } else if (json.fallback) {
