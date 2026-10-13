@@ -57,6 +57,22 @@ npm run build
 npm test                          # or: npm run test:ui
 ```
 
+### Lighthouse
+
+`npm run lighthouse` (after a build) audits `/`, `/resume` and a project page three times each with Lighthouse's mobile profile (slow 4G, 4× slower CPU) and fails if a limit is broken (warnings are reported but don't fail the build):
+
+| Check | Limit |
+| --- | --- |
+| Largest Contentful Paint | ≤ 2.5 s |
+| Cumulative Layout Shift | ≤ 0.1 |
+| Accessibility score | ≥ 95 |
+| Best Practices score | ≥ 90 |
+| SEO score | ≥ 95 |
+| Performance score | ≥ 90 (warning only, for now) |
+| Total Blocking Time | ≤ 300 ms (warning only, for now) |
+
+CI runs it after the Playwright suite and keeps the HTML reports as a build artifact. The limits live in `lighthouserc.json`.
+
 Tests never send real email or analytics: the test server runs with `RESEND_API_KEY` and the Umami ID blanked.
 
 Copy `.env.example` to `.env.local` and fill in values as needed (all optional). Never commit `.env.local`; it is already in `.gitignore`.
