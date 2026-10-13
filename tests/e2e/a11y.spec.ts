@@ -14,7 +14,7 @@ for (const theme of ["dark", "light"] as const) {
     });
 
     for (const path of pages) {
-      test(`${path} passes WCAG 2.1 AA checks`, async ({ page }) => {
+      test(`${path} meets WCAG 2.1 AA`, async ({ page }) => {
         await page.goto(path);
         await page.waitForLoadState("networkidle");
         const results = await new AxeBuilder({ page })
