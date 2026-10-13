@@ -34,13 +34,14 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
 
   return (
     <article className="mx-auto max-w-4xl px-5 pt-36 pb-24 sm:px-8">
-      <Reveal>
+      {/* Above the fold: CSS entrance (not <Reveal>) so the title and description paint before hydration. */}
+      <div className="animate-fade-up">
         <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="size-4" /> All projects
         </Link>
-      </Reveal>
+      </div>
 
-      <Reveal delay={0.05} className="mt-10">
+      <div className="animate-fade-up mt-10" style={{ animationDelay: "0.05s" }}>
         <div className="flex flex-wrap items-center gap-3">
           <ProjectStatusBadge status={project.status} />
           <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
@@ -48,9 +49,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-6xl">{project.title}</h1>
         <p className="mt-3 text-2xl font-medium text-accent">{project.tagline}</p>
         <p className="mt-8 text-lg leading-relaxed text-muted-foreground">{project.description}</p>
-      </Reveal>
+      </div>
 
-      <Reveal delay={0.1} className="mt-10 flex flex-wrap gap-3">
+      <div className="animate-fade-up mt-10 flex flex-wrap gap-3" style={{ animationDelay: "0.1s" }}>
         {project.live && (
           <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground">
             Live demo <ArrowUpRight className="size-4" />
@@ -61,7 +62,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <SiGithub aria-hidden className="size-4" /> {r.label}
           </a>
         ))}
-      </Reveal>
+      </div>
 
       <div className="mt-16 grid gap-10 md:grid-cols-[1fr_14rem]">
         <Reveal>
