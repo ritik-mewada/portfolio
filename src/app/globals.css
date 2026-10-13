@@ -200,10 +200,22 @@ html.lenis body {
 /* ---------- QA Lens ---------- */
 .qa-xray {
   position: fixed;
-  inset: 0;
+  left: 0;
+  top: 0;
   z-index: 55;
   overflow: hidden;
+  border-radius: 50%;
   pointer-events: none;
+  will-change: transform;
+}
+.qa-xray-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  will-change: transform;
   background-color: #07152b;
   background-image:
     linear-gradient(rgba(120, 180, 255, 0.13) 1px, transparent 1px),
@@ -211,7 +223,7 @@ html.lenis body {
   background-size: 24px 24px;
   color: #cfe3ff;
 }
-.qa-xray * {
+.qa-xray-inner * {
   color: #cfe3ff !important;
   -webkit-text-fill-color: #cfe3ff !important;
   background: transparent !important;
@@ -225,6 +237,8 @@ html.lenis body {
   opacity: 1 !important;
 }
 .qa-xray svg { opacity: 0.55 !important; }
+/* Pointer-driven tilt would freeze at whatever angle the mirror was copied at. */
+.qa-xray [data-qa-pointer-fx] { transform: none !important; }
 /* Keep the marquee's animation in the mirror; QaLens syncs its position to the page. */
 .qa-xray .animate-marquee {
   animation-name: marquee !important;
@@ -249,8 +263,8 @@ html.lenis body {
 .qa-xray [data-qa]::after {
   content: attr(data-qa);
   /* Slide along the element to stay inside the lens, but never leave the element's box. */
-  left: clamp(0px, calc(var(--lens-x, 0px) - var(--qa-x, 0px)), max(0px, calc(100% - 9em)));
-  top: clamp(-18px, calc(var(--lens-y, -18px) - var(--qa-y, 0px)), max(-18px, calc(100% - 14px)));
+  left: clamp(0px, var(--qa-dx, 0px), max(0px, calc(100% - 9em)));
+  top: clamp(-18px, var(--qa-dy, -18px), max(-18px, calc(100% - 14px)));
   background: #4fd1ff !important;
   color: #07152b !important;
   -webkit-text-fill-color: #07152b !important;
