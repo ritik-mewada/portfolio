@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader2, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { site } from "@/content/site";
 
@@ -10,6 +10,11 @@ const inputClass =
 
 export function ContactForm() {
   const [pending, setPending] = useState(false);
+  // When the form appeared; the server rejects submissions faster than a person can type.
+  const openedAt = useRef(0);
+  useEffect(() => {
+    openedAt.current = Date.now();
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,12 +25,13 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, elapsed: Date.now() - openedAt.current, page: window.location.pathname }),
       });
       const json = (await res.json().catch(() => ({}))) as { error?: string; fallback?: boolean };
       if (res.ok) {
         toast.success("Message sent — I'll get back to you soon.");
         form.reset();
+        openedAt.current = Date.now();
       } else if (json.fallback) {
         const subject = encodeURIComponent(`Hello from ${data.name}`);
         const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`);
