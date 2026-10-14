@@ -24,7 +24,7 @@ export async function GitHubActivity() {
 
   return (
     <section id="github" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-28 sm:px-8">
-      <SectionHeading index="05" eyebrow="Open source" title="Recently on GitHub" description="Pulled from the GitHub API and refreshed daily." />
+      <SectionHeading index="05" eyebrow="Open source" title="Recent GitHub Activity" description="Data retrieved from the GitHub API and updated daily." />
 
       <div className="grid gap-4 lg:grid-cols-[1fr_1.6fr]">
         <Reveal>
@@ -38,7 +38,7 @@ export async function GitHubActivity() {
             </a>
             <dl className="mt-8 grid grid-cols-2 gap-4">
               <div>
-                <dt className="flex items-center gap-1.5 text-xs text-muted-foreground"><BookMarked className="size-3.5" /> Public repos</dt>
+                <dt className="flex items-center gap-1.5 text-xs text-muted-foreground"><BookMarked className="size-3.5" /> Public repositories</dt>
                 <dd className="mt-1 text-3xl font-semibold">{data.publicRepos}</dd>
               </div>
               <div>
@@ -47,7 +47,7 @@ export async function GitHubActivity() {
               </div>
             </dl>
             <div className="mt-auto pt-8">
-              <p className="mb-3 text-xs text-muted-foreground">Languages across repos</p>
+              <p className="mb-3 text-xs text-muted-foreground">Programming languages used across repositories</p>
               <div className="flex h-2.5 overflow-hidden rounded-full bg-muted">
                 {data.languages.map((l) => (
                   <span key={l.name} style={{ width: `${(l.count / total) * 100}%`, background: languageColors[l.name] ?? "var(--muted-foreground)" }} />

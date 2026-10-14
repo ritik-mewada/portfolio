@@ -24,7 +24,7 @@ export function Contact() {
             <span className="text-gradient">reliable.</span>
           </>
         }
-        description="Whether it's a role, a project, or a question about testing IoT systems, my inbox is open."
+        description="Whether you're reaching out about a role, a project, or a question about IoT testing, my inbox is open."
       />
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
         <Reveal className="space-y-3">

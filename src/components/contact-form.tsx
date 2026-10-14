@@ -99,7 +99,7 @@ export function ContactForm() {
       </div>
       <label className="block space-y-2">
         <span className="text-sm font-medium">Message</span>
-        <textarea name="message" required minLength={10} maxLength={5000} rows={5} placeholder="Tell me about the role, team or project…" className={`${inputClass} resize-y`} />
+        <textarea name="message" required minLength={10} maxLength={5000} rows={5} placeholder="Tell me about the role, team, or project…" className={`${inputClass} resize-y`} />
       </label>
       <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
       <button

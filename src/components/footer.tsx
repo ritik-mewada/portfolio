@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="no-print border-t">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 text-sm text-muted-foreground sm:flex-row sm:px-8">
         <p>
-          Designed &amp; built by {site.name} · Next.js, Tailwind CSS &amp; Motion
+          Designed and built by {site.name} · Next.js, Tailwind CSS, and Motion
         </p>
         <div className="flex items-center gap-4">
           <span className="hidden font-mono text-xs sm:inline">

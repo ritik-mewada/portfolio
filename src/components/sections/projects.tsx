@@ -20,8 +20,8 @@ export function Projects() {
       <SectionHeading
         index="04"
         eyebrow="Projects"
-        title="Things I've built on my own time"
-        description="Most of my best work lives in private company repos. These are side projects I build to learn new tools and patterns. Some are finished, and others are still evolving."
+        title="Projects I've built in my spare time"
+        description="Much of my professional work is hosted in private company repositories. These are side projects I work on to explore new tools and development patterns, some completed and others still in development."
       />
 
       <div className="grid gap-4 md:grid-cols-6">
@@ -73,7 +73,7 @@ export function Projects() {
 
       <Reveal className="mt-10 text-center">
         <a href={site.socials.github} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-          <SiGithub aria-hidden className="size-4" /> Everything else is on GitHub <ArrowUpRight className="size-3.5" />
+          <SiGithub aria-hidden className="size-4" /> Explore my other projects on GitHub <ArrowUpRight className="size-3.5" />
         </a>
       </Reveal>
     </section>

@@ -19,7 +19,7 @@ export function Experience() {
           <li key={job.company + job.start} className="relative md:grid md:grid-cols-[12rem_1fr] md:gap-8">
             <Reveal delay={0.05} className="mb-3 pl-8 md:mb-0 md:pt-6 md:pl-0">
               <p className="font-mono text-xs text-muted-foreground md:text-right md:pr-8">
-                {job.start} — {job.end}
+                {job.start} – {job.end}
               </p>
             </Reveal>
 

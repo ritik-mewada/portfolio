@@ -13,7 +13,7 @@ export const techIcons: Record<string, ComponentType> = {
   AWS: TbBrandAws,
   Azure: TbBrandAzure,
   Cypress: SiCypress,
-  "Django REST": SiDjango,
+  "Django REST Framework": SiDjango,
   Docker: SiDocker,
   Express: SiExpress,
   "GitHub Actions": SiGithubactions,

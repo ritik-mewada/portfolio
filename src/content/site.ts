@@ -14,11 +14,11 @@ export const site = {
     "Front-End Architecture",
   ],
   summary:
-    "Software engineer with 4+ years across full-stack development and quality engineering. I've shipped React, Next.js, and Node.js products for marketplaces, analytics platforms, and SaaS tools, and I now validate IoT systems for digital mining at Maestro Digital Mine.",
+    "Software engineer with over four years of experience in full-stack development and quality engineering. I've shipped products built with React, Next.js, and Node.js for marketplaces, analytics platforms, and SaaS tools, and I now validate IoT systems used in digital mining at Maestro Digital Mine.",
   about: [
-    "I started out writing React dashboards and REST APIs, and over the years grew into owning front-end architecture, design systems, and CI/CD pipelines for products used by thousands of people.",
-    "Building things taught me how they break, and that is what drew me to quality engineering. I now test the sensors, devices, and networks used to monitor underground mines, where accurate readings are critical to safety.",
-    "I enjoy work that bridges both worlds: developer-minded testing and test-minded development.",
+    "I started out building React dashboards and REST APIs, and over the years, I grew into a role where I owned front-end architecture, design systems, and CI/CD pipelines for products used by thousands of people.",
+    "Building software taught me how it can break, and that's what drew me toward quality engineering. I now test the sensors, devices, and networks used to monitor underground mines, where accurate readings are critical to safety.",
+    "I enjoy working at the intersection of these two disciplines: developer-minded testing and test-minded development.",
   ],
   location: "Ontario, Canada",
   email: "ritikmewada@gmail.com",
@@ -30,10 +30,10 @@ export const site = {
   },
   githubUsername: "ritik-mewada",
   stats: [
-    { value: 4, suffix: "+", label: "Years building software" },
+    { value: 4, suffix: "+", label: "Years of software development experience" },
     { value: 5, suffix: "", label: "Companies I've shipped products for" },
-    { value: 25, suffix: "k+", label: "Daily API requests served" },
-    { value: 20, suffix: "+", label: "Public repos on GitHub" },
+    { value: 25, suffix: "k+", label: "API requests handled daily" },
+    { value: 20, suffix: "+", label: "Public GitHub repositories" },
   ],
 } as const;
 
@@ -60,13 +60,13 @@ export const experience: Experience[] = [
     end: "Present",
     current: true,
     summary:
-      "Perform manual testing of hardware devices, sensors, and communication networks used for safety monitoring in underground mines.",
+      "Manually test devices, sensors, and networks used for safety monitoring in underground mines.",
     highlights: [
       "Design test cases and perform manual testing on hardware devices and airflow sensors.",
-      "Configure and test gas sensors from multiple manufacturers, perform factory calibrations, document readings in Excel, and conduct weekly or biweekly tests to assess long-term reliability and identify potential failures.",
-      "Verify device communication over Modbus, TCP/IP, and MQTT.",
-      "Use Wireshark to identify the IP addresses of connected devices and monitor device-specific network traffic.",
-      "Document bugs in Jira with clear reproduction steps and track them through to resolution.",
+      "Test gas sensors from different manufacturers by configuring them, performing factory calibration, recording sensor readings in Excel, and retesting them every one to two weeks to assess their reliability over time and identify potential failures.",
+      "Verify that devices communicate correctly using Modbus, TCP/IP, and MQTT.",
+      "Use Wireshark to identify connected devices' IP addresses and monitor device-specific network traffic.",
+      "Log bugs in Jira with clear reproduction steps and track them through resolution.",
     ],
     stack: ["Manual Testing", "Test Cases", "Gas & Airflow Sensors", "Calibration", "Bump Testing", "Modbus", "TCP/IP", "MQTT", "Wireshark", "Jira"],
   },
@@ -77,14 +77,14 @@ export const experience: Experience[] = [
     start: "May 2025",
     end: "Oct 2025",
     summary:
-      "Front-end lead for a multi-vendor marketplace built with React and Django REST Framework.",
+      "Served as the front-end lead for a multi-vendor marketplace built with React and Django REST Framework.",
     highlights: [
       "Owned front-end architecture and a reusable component library, reducing UI development effort by approximately 30%.",
-      "Integrated Stripe Connect for 50+ vendors and the DoorDash delivery APIs, reducing payment errors by 40% and improving delivery-tracking visibility by 60%.",
-      "Containerized services with Docker and Kubernetes to enable zero-downtime releases, and load-tested the platform for a launch target of 5,000+ monthly users.",
-      "Automated CI/CD with GitHub Actions, reducing deployment time from 45 to 20 minutes, and mentored two junior developers.",
+      "Integrated Stripe Connect for 50+ vendors and the DoorDash delivery APIs, resulting in 40% fewer payment errors and a 60% improvement in delivery-tracking visibility.",
+      "Containerized services with Docker and Kubernetes to enable zero-downtime releases, and load-tested the platform to support a launch target of over 5,000 monthly users.",
+      "Automated CI/CD with GitHub Actions, reducing deployment times from 45 to 20 minutes, and mentored two junior developers.",
     ],
-    stack: ["React", "Django REST", "Stripe Connect", "Docker", "Kubernetes", "GitHub Actions"],
+    stack: ["React", "Django REST Framework", "Stripe Connect", "Docker", "Kubernetes", "GitHub Actions"],
   },
   {
     company: "Vosyn",
@@ -92,11 +92,11 @@ export const experience: Experience[] = [
     location: "Toronto, ON",
     start: "Oct 2024",
     end: "Apr 2025",
-    summary: "Migrated a React SPA to a fast, SEO-friendly Next.js and TypeScript application.",
+    summary: "Migrated a React single-page application to a fast, SEO-friendly application built with Next.js and TypeScript.",
     highlights: [
-      "Led the migration from React to Next.js and TypeScript with SSR/ISR, improving the Lighthouse SEO score by 35% and reducing initial load time by 1.2 seconds.",
+      "Led the migration from React to Next.js and TypeScript with SSR/ISR, improving the Lighthouse SEO score by 35% and reducing initial page-load time by 1.2 seconds.",
       "Introduced TanStack Query, lazy loading, and code splitting, reducing API wait times by 45% and bundle size by 28%.",
-      "Built a WCAG 2.1 AA-compliant Tailwind component library used across 20+ screens, reducing post-release UI fixes by 20%.",
+      "Built a Tailwind CSS component library compliant with WCAG 2.1 AA, used across 20+ screens, reducing post-release UI fixes by 20%.",
     ],
     stack: ["Next.js", "TypeScript", "TanStack Query", "Tailwind CSS", "Jest", "RTL"],
   },
@@ -106,11 +106,11 @@ export const experience: Experience[] = [
     location: "Ahmedabad, India",
     start: "Jan 2022",
     end: "Nov 2023",
-    summary: "Full-stack MERN developer working on analytics dashboards and business platforms.",
+    summary: "Worked as a full-stack MERN developer building analytics dashboards and business platforms.",
     highlights: [
       "Built MERN applications serving 10,000+ active users and REST APIs handling 25,000–30,000 requests per day.",
-      "Improved rendering performance by approximately 30% through caching and bundle optimization, and standardized Redux across 15+ modules, reducing UI defects by 40%.",
-      "Delivered biweekly releases as part of an eight-person Scrum team and resolved 50+ production incidents.",
+      "Improved rendering performance by approximately 30% through caching, bundle optimization, and standardizing Redux across more than 15 modules, resulting in 40% fewer UI defects.",
+      "Delivered releases every two weeks as part of an eight-person Scrum team and resolved 50+ production incidents.",
     ],
     stack: ["React", "Node.js", "Express", "MongoDB", "Redux", "Redis"],
   },
@@ -122,8 +122,8 @@ export const experience: Experience[] = [
     end: "Oct 2021",
     summary: "First professional role, focused on internal tools and dashboards.",
     highlights: [
-      "Built a React admin dashboard that visualizes 1M+ MySQL records for internal stakeholders.",
-      "Participated in Agile sprint planning and stand-ups, helping accelerate feature delivery by approximately 20%.",
+      "Built a React admin dashboard to visualize more than one million MySQL records for internal stakeholders.",
+      "Participated in Agile sprint planning and daily stand-ups, helping accelerate feature delivery by approximately 20%.",
     ],
     stack: ["React", "CoreUI", "MySQL"],
   },
@@ -154,12 +154,12 @@ export const skills: SkillGroup[] = [
     items: ["TypeScript", "JavaScript", "Python", "Java", "SQL", "HTML", "CSS"],
   },
   {
-    title: "Frontend",
+    title: "Front-end",
     items: ["React", "Next.js", "Redux", "TanStack Query", "Tailwind CSS", "React Native", "Angular"],
   },
   {
-    title: "Backend",
-    items: ["Node.js", "Express", "NestJS", "Django REST", "GraphQL", "WebSockets", "Stripe"],
+    title: "Back-end",
+    items: ["Node.js", "Express", "NestJS", "Django REST Framework", "GraphQL", "WebSockets", "Stripe"],
   },
   {
     title: "Data",
@@ -200,9 +200,9 @@ export const projects: Project[] = [
   {
     slug: "mernspace",
     title: "MERNspace",
-    tagline: "Microservice food-ordering platform",
+    tagline: "Microservices-based food-ordering platform",
     description:
-      "A multi-tenant pizza-ordering platform split into independent services: an auth service that issues RSA-signed JWTs, an order service with Stripe payments, a Next.js storefront, and a React admin dashboard.",
+      "A multi-tenant pizza-ordering platform divided into independent services: an auth service that issues RSA-signed JWTs, an order service with Stripe payments, a Next.js storefront, and a React admin dashboard.",
     status: "In progress",
     year: "2024 – 2026",
     featured: true,
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     title: "Playwright Test Suite",
     tagline: "E2E and API test automation framework",
     description:
-      "A TypeScript test-automation framework built on the Page Object Model, covering API contracts and security, a full e-commerce checkout flow, and a real-world Angular SPA.",
+      "A TypeScript-based test automation framework built using the Page Object Model, covering API contract and security testing, a complete e-commerce checkout flow, and a real-world Angular single-page application.",
     status: "Complete",
     year: "2026",
     featured: true,
@@ -245,9 +245,9 @@ export const projects: Project[] = [
   {
     slug: "stylecast-erp",
     title: "StyleCast ERP",
-    tagline: "Multi-tenant brand admin API",
+    tagline: "Multi-tenant brand administration API",
     description:
-      "Backend for a fashion marketplace's brand-admin ERP. Brands manage products, inventory, orders, shipping rules, and analytics through a documented REST API.",
+      "A back-end system for a fashion marketplace's brand administration ERP. Brands manage products, inventory, orders, shipping rules, and analytics through a documented REST API.",
     status: "In progress",
     year: "2026",
     featured: true,
@@ -263,9 +263,9 @@ export const projects: Project[] = [
   {
     slug: "pricify",
     title: "Pricify",
-    tagline: "Embeddable pricing-card SaaS",
+    tagline: "SaaS platform for embeddable pricing cards",
     description:
-      "A SaaS tool that lets businesses design pricing cards, preview them live, and embed them in any website, replacing manually edited pricing pages.",
+      "A SaaS tool that lets businesses design pricing cards, preview them live, and embed them in any website, eliminating the need to manually edit pricing pages.",
     status: "Academic",
     year: "2025",
     featured: true,
