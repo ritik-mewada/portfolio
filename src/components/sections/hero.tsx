@@ -134,7 +134,7 @@ export function Hero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-accent" />
               </span>
-              Now: {current.role} at <span className="font-medium text-foreground">{current.company}</span>
+              Currently: {current.role} at <span className="font-medium text-foreground">{current.company}</span>
             </a>
           )}
 
