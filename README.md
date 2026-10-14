@@ -34,13 +34,13 @@ CI runs lint, typecheck, build, the Playwright suite and Lighthouse on every pus
 
 ## Deploying
 
-The site deploys to GitHub Pages from `.github/workflows/deploy.yml` on every push to `main`, and rebuilds daily to refresh the GitHub section. One-time setup:
+The site deploys to GitHub Pages from `.github/workflows/deploy.yml` after CI passes on each push to `main`, and rebuilds daily to refresh the GitHub section. One-time setup:
 
 1. **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions**.
 2. For the root URL `https://ritik-mewada.github.io`, the repository must be named `ritik-mewada.github.io`. Under any other name it is served at `https://ritik-mewada.github.io/<repo>/`; the workflow picks up the sub-path on its own.
 3. Optional, under **Settings → Secrets and variables → Actions**:
    - secret `WEB3FORMS_KEY`: a free access key from [web3forms.com](https://web3forms.com) so the contact form sends email (otherwise it opens the visitor's email client);
-   - variable `UMAMI_WEBSITE_ID`: enables Umami analytics;
+   - variable `UMAMI_WEBSITE_ID`: enables Umami analytics (create a website at [cloud.umami.is](https://cloud.umami.is) and copy its Website ID);
    - variable `SITE_URL`: only needed for a custom domain.
 
 To preview the exported site locally: `npm run build && node scripts/serve-static.mjs out 3000`.
