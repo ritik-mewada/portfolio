@@ -36,7 +36,7 @@ export function Skills() {
           index="03"
           eyebrow="Toolbox"
           title="The stack I reach for"
-          description="Comfortable across the whole lifecycle — designing the UI, writing the API, shipping the container and proving it all works."
+          description="Comfortable across the entire lifecycle: designing the UI, writing the API, shipping the container, and proving that it all works."
         />
       </div>
 

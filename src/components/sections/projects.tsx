@@ -21,7 +21,7 @@ export function Projects() {
         index="04"
         eyebrow="Projects"
         title="Things I've built on my own time"
-        description="Most of my best work lives in private company repos. These are side projects I build to learn new tools and patterns — some finished, some still evolving."
+        description="Most of my best work lives in private company repos. These are side projects I build to learn new tools and patterns. Some are finished, and others are still evolving."
       />
 
       <div className="grid gap-4 md:grid-cols-6">
