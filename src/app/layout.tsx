@@ -18,7 +18,7 @@ import "./globals.css";
 const inter = Inter({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const description = `${site.name} — ${site.summary}`;
+const description = `${site.name} — ${site.description}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
     url: "/",
     siteName: site.name,
     title: `${site.name} — ${site.role}`,
-    description: site.summary,
+    description: site.description,
     firstName: "Ritik",
     lastName: "Mewada",
     images: [ogImage],
   },
-  twitter: { card: "summary_large_image", title: `${site.name} — ${site.role}`, description: site.summary, images: [ogImage] },
+  twitter: { card: "summary_large_image", title: `${site.name} — ${site.role}`, description: site.description, images: [ogImage] },
   robots: { index: true, follow: true },
   // Google Search Console ownership check.
   verification: { google: "kWV4UzPeax3SFY5iJQvPCOusPypzv2WhZ9gEmYqH-h0" },

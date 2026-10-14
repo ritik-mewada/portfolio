@@ -15,6 +15,9 @@ export const site = {
   ],
   summary:
     "Software engineer with over four years of experience in full-stack development and quality engineering. I've shipped products built with React, Next.js, and Node.js for marketplaces, analytics platforms, and SaaS tools, and I now validate IoT systems used in digital mining at Maestro Digital Mine.",
+  // Short version for search results and link previews (Google truncates around 155–160 characters).
+  description:
+    "Software engineer in Ontario: full-stack React and Node.js developer, now testing IoT mine-safety systems at Maestro Digital Mine.",
   about: [
     "I started out building React dashboards and REST APIs, and over the years, I grew into a role where I owned front-end architecture, design systems, and CI/CD pipelines for products used by thousands of people.",
     "Building software taught me how it can break, and that's what drew me toward quality engineering. I now test the sensors, devices, and networks used to monitor underground mines, where accurate readings are critical to safety.",
@@ -31,7 +34,7 @@ export const site = {
   githubUsername: "ritik-mewada",
   stats: [
     { value: 4, suffix: "+", label: "Years of software development experience" },
-    { value: 5, suffix: "", label: "Companies I've shipped products for" },
+    { value: 5, suffix: "", label: "Companies shipped for" },
     { value: 25, suffix: "k+", label: "API requests handled daily" },
     { value: 20, suffix: "+", label: "Public GitHub repositories" },
   ],
@@ -63,7 +66,8 @@ export const experience: Experience[] = [
       "Manually test devices, sensors, and networks used for safety monitoring in underground mines.",
     highlights: [
       "Design test cases and perform manual testing on hardware devices and airflow sensors.",
-      "Test gas sensors from different manufacturers by configuring them, performing factory calibration, recording sensor readings in Excel, and retesting them every one to two weeks to assess their reliability over time and identify potential failures.",
+      "Configure and calibrate gas sensors from multiple manufacturers, recording readings in Excel.",
+      "Run bump tests and retest sensors every one to two weeks to track long-term reliability and catch failing units early.",
       "Verify that devices communicate correctly using Modbus, TCP/IP, and MQTT.",
       "Use Wireshark to identify connected devices' IP addresses and monitor device-specific network traffic.",
       "Log bugs in Jira with clear reproduction steps and track them through resolution.",
@@ -79,8 +83,8 @@ export const experience: Experience[] = [
     summary:
       "Served as the front-end lead for a multi-vendor marketplace built with React and Django REST Framework.",
     highlights: [
-      "Owned front-end architecture and a reusable component library, reducing UI development effort by approximately 30%.",
-      "Integrated Stripe Connect for 50+ vendors and the DoorDash delivery APIs, resulting in 40% fewer payment errors and a 60% improvement in delivery-tracking visibility.",
+      "Owned front-end architecture and a reusable component library that made UI development faster and more consistent.",
+      "Integrated Stripe Connect for 50+ vendors and the DoorDash delivery APIs, resulting in 40% fewer payment errors and clearer delivery tracking.",
       "Containerized services with Docker and Kubernetes to enable zero-downtime releases, and load-tested the platform to support a launch target of over 5,000 monthly users.",
       "Automated CI/CD with GitHub Actions, reducing deployment times from 45 to 20 minutes, and mentored two junior developers.",
     ],

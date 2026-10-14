@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${site.name} — ${site.role}`,
     short_name: site.shortName,
-    description: site.summary,
+    description: site.description,
     start_url: `${basePath}/`,
     display: "standalone",
     background_color: "#f5f7fb",
