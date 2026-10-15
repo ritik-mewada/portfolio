@@ -70,8 +70,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      # Uses the Chrome preinstalled on the runner.
-      - run: npx lhci autorun
+      # Uses the Chrome preinstalled on the runner. The homepage's LCP sits close to the 2.5 s
+      # budget on shared runners, so it gets 3 runs and is judged on the median; the other
+      # pages stay well under budget and get 1 run each. Server and settings come from lighthouserc.json.
+      - run: npx lhci collect --url=http://localhost:3300/ --numberOfRuns=3
+      - run: npx lhci collect --url=http://localhost:3300/resume/ --url=http://localhost:3300/projects/playwright-suite/ --numberOfRuns=1 --additive
+      - run: npx lhci assert
+      - run: npx lhci upload
+        if: always()
       - run: node scripts/lighthouse-summary.mjs
         if: always()
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
