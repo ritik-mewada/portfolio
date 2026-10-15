@@ -35,8 +35,8 @@ export function Skills() {
         <SectionHeading
           index="03"
           eyebrow="Toolbox"
-          title="My preferred technology stack"
-          description="Comfortable working across the entire software development lifecycle: designing user interfaces, developing APIs, deploying containerized applications, and validating their functionality."
+          title="The stack I reach for"
+          description="Comfortable across the whole lifecycle: designing the UI, writing the API, shipping the container, and proving it all works."
         />
       </div>
 

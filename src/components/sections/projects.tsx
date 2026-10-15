@@ -20,8 +20,8 @@ export function Projects() {
       <SectionHeading
         index="04"
         eyebrow="Projects"
-        title="Projects I've built in my spare time"
-        description="Much of my professional work is hosted in private company repositories. These are side projects I work on to explore new tools and development patterns, some completed and others still in development."
+        title="Things I've built on my own time"
+        description="Most of my professional work lives in private company repositories. These are side projects I build to learn new tools and patterns. Some are finished, and others are still evolving."
       />
 
       <div className="grid gap-4 md:grid-cols-6">
