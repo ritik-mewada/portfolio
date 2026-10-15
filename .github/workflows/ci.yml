@@ -5,6 +5,10 @@ on:
     branches: [main, master]
   pull_request:
 
+# CI only reads the repo; it never needs to write to it.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,8 +16,8 @@ jobs:
       # Placeholder so the contact form's delivery tests run; requests to Web3Forms are mocked.
       NEXT_PUBLIC_WEB3FORMS_KEY: test-key
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
           cache: npm
@@ -26,13 +30,13 @@ jobs:
       - run: npx lhci autorun
       - run: node scripts/lighthouse-summary.mjs
         if: always()
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: lighthouse-reports
           path: .lighthouseci/reports/
           retention-days: 14
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
         with:
           name: playwright-report
