@@ -19,3 +19,12 @@ updates:
       # Minor and patch updates in one weekly PR; major versions get their own PR.
       minor-and-patch:
         update-types: [minor, patch]
+    # Major upgrades of these tools are migrations to plan, not routine bumps.
+    # @types/node should track the Node version CI runs on, not the newest release.
+    ignore:
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
