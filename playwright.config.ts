@@ -9,6 +9,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: CI,
   retries: CI ? 1 : 0,
+  // Playwright defaults to half the CPU cores; the CI runner's 4 cores are free for the tests alone.
+  workers: CI ? "100%" : undefined,
   reporter: CI ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: `http://localhost:${PORT}`,
